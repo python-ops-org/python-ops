@@ -1,0 +1,50 @@
+Offline Coding problems / Solutions
+Problem 1:
+• Write a program to compute the checksum of a file
+o Checksum of a file
+§ input --> file name
+§ output --> checksum of the file
+o Assumption : input can be ASCII, or Binary file
+o Candidate shall not use utility like cksum, inbuild library function , or thirdparty applications to
+compute checksum (Donot use libraries or functions like hashlib / hash_md5etc in your solution)
+Problem 2:
+• Write a utility to email the test results
+o Assumptions / Inputs
+§ Test results are stored in "test-results" directory
+§ test-result/<result-file> contains results of test cases (assume <result-file> is a csv format,
+where the first entry is header row)
+§ "test-results" directory can either be local or remote
+§ list of email recipients would be given as input
+o Output --> Utility shall extract the contents of the latest test run
+§ compute pass / fail percentage
+§ Form an email with test summary
+§ Attach the test results (file) in email
+Problem 3:
+• Problem 3 (There are 3 sections to this problem (a), (b), (c) )
+ASSUMPTION FOR ALL THE CASES:
+1) The line comparisons are case-in-sensitive.
+2) There are NO special characters in the file
+(a) Write code to count the number of times a line occurs in a file. All the lines in the file end with a full stop,
+and are of the same size(same number of words).
+• OUTPUT:
+o print out the line which is similar, and the number of times it occurs in the file.
+(b) In addition, find lines where only the first word is the same/different.
+o Example1:
+§ “The lazy fox jumps high" AND “A lazy fox jumps high" .
+o OUTPUT: Print the lines which satisfy this condition. In this case,
+§ The lazy fox jumps high
+§ A lazy fox jumps high
+(c) Also, find lines which are off by 1. Output of your program should just be a file with all the Off by 1 lines
+DEFINITION:Off by 1: Two lines are off by 1 when the two lines can be made identical by swapping two
+adjacent words on one line. The words which need to be swapped can occur anywhere in the sentence.
+Example1: "The lazy fox jumps high" AND "The fox lazy jumps high" are off by 1.
+Example2: “The lazy fox jumps high" AND “high lazy fox jumps The" are NOT off by 1.
+Important instruction to the candidate:
+• Turn in the programming assignment in ".zip" or ".tar" format
+• Can use any programming language of choice
+• Each assignment should be in a separate sub directory
+• Share commands of how to run the program
+• Should take care of edge cases
+• In-case code is written in a compliable language, have the candidate share the compilation step
+• All the problems should be turned in
+• Highly desirable to turn in the input file that you have used (Problem 3)
