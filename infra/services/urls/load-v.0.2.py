@@ -8,18 +8,16 @@ import requests
 import argparse
 
 
-
-
-
-
-
 def check_url(url):
-	try:
-		for i in range(1,1001):
-			r=requests.get(url)
-			print "HTTP/1.1 %s %s"%(r.status_code,r.reason)
-	except:
-		print "%s is not reachable"%url
+    try:
+           #url = "http://localhost"
+           for i in range(1,100):
+               r=requests.get(url)
+               #print(r)
+               print("HTTP/1.1 %s %s"%(r.status_code,r.reason))
+
+    except:
+             print("not reachable")
 def main():
 	    parser = argparse.ArgumentParser()
 	    parser.add_argument("-u")
@@ -27,8 +25,10 @@ def main():
 	    if (args.u is not None) and ("http" in args.u):
 	      check_url(args.u)
 	    else:
-	      print "Wrong paramter combination ."
+	           print("WrongParser")
 
 main()
 
 
+
+#check_url()
