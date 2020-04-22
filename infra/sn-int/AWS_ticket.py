@@ -7,7 +7,7 @@ import threading
 class create_aws_case():
     def __init__(self):
 
-        self.client = boto3.client('support',region_name='us-east-1',aws_access_key_id='AKIAJ3K3EUMCD7SHJDFA',aws_secret_access_key='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')
+        self.client = boto3.client('support',region_name='us-east-1',aws_access_key_id='',aws_secret_access_key='')
         self.serviceList = self.client.describe_services()
         self.severityList = self.client.describe_severity_levels()
         # thread = threading.Thread(target=lambda: self.guiImplementation())
