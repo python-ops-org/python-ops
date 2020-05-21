@@ -1,0 +1,9 @@
+- hosts: 127.0.0.1
+  tasks:
+      - name: print hello
+        shell: echo "hello world" 
+        register: helo
+      - set_fact: 
+          my_var: "{{ lookup('ini', 'ResourceDisk.MountPoint type=properties file=w.ini') }}"  
+      - debug: 
+          msg: "{{ my_var }}"
