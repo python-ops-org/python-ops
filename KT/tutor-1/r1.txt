@@ -1,0 +1,32 @@
+Im working on it
+
+current project : user detail by python-cassandra for multiple nodes
+
+Python script
+
+1. It will login to remote machine 
+
+2.  It will create user with password and provide sudo privilege as per requirement
+
+3. Then it will create table users in cassandra
+
+4. Then it will insert user details in cassandra as follows :
+ 
+ table will be look like this 
+
+
+ip                      user        create-date                sudo
+
+10.100.1.5        user1       Jun 11 08:34              yes
+10.100.1.7        user2       Jun 12 08:40               no
+
+
+5.Now data will be fetched from this users table and displayed  to django in form of table on webrowser with edit option
+
+by edit option administrator can create , delete data
+
+6. when above mentioned process will be done successfully a mail will be sent with notification that 
+
+user creation successfull
+
+

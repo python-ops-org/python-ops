@@ -1,0 +1,8 @@
+---
+node-1: 
+   - host:  54.148.227.62
+     user:  nik
+     pass:  iis123
+     cmd-1: bash /home/nik/test.sh
+     
+
