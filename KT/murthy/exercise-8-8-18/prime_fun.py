@@ -39,13 +39,13 @@ check(n)
 """
 n=10
 i=2
-f=0  
+c=0  
 while (i<n/2):
     if n%i == 0:
-        f=1 
+        c=1 
         break  
     i+=1
-if f==0:    
+if c==0:    
     print("prime")
 else:
     print("not prime")    
