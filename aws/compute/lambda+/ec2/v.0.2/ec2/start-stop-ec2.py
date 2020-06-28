@@ -1,13 +1,3 @@
-##python start-stop-ec2.py -p start -u https://u2gxjtmno6.execute-api.us-east-1.amazonaws.com/prod/service 
-##python start-stop-ec2.py -p stop -u https://u2gxjtmno6.execute-api.us-east-1.amazonaws.com/prod/service
-
-
-
-#python ec2.py -a lambda -s start
-#python ec2.py  -a lambda -s stop
-
-
-
 
 import boto3
 import requests
@@ -21,12 +11,10 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 
 log_file = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M") + "-start_stop.log"
-'''
-regions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'ca-central-1',
-           'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-west-3',
-           'ap-northeast-1', 'ap-northeast-2', 'ap-southeast-1',
+regions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'ca-central-1', 
+           'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-west-3', 
+           'ap-northeast-1', 'ap-northeast-2', 'ap-southeast-1', 
            'ap-southeast-2', 'ap-south-1', 'sa-east-1']
-'''
 
 def sendLogFileEmail(log_data, log_data_csv):
 	message = MIMEMultipart()
@@ -34,7 +22,7 @@ def sendLogFileEmail(log_data, log_data_csv):
 	message['From'] = 'chakraborty.rock@gmail.com'
 	message['To'] = 'sudipta1436@gmail.com'
 	message.preamble = 'Multipart message.\n'
-	message.attach(MIMEText('status of service'))
+	message.attach(MIMEText('status of service'))	
 	part = MIMEApplication(log_data)
 	part.add_header('Content-Disposition', 'attachment; filename="%s"' % log_file)
 	partcsv = MIMEApplication(log_data_csv)
@@ -51,87 +39,83 @@ def sendLogFileEmail(log_data, log_data_csv):
 	#print "E-mail sent: " + str(response)
 
 def arrayToString(x):
-	return ", ".join(x)
+	if len(x) == 1:
+		return x[0]
+	else:
+		return x[0] + ", " + arrayToString(x[1:])
+
+##starting lambda function 
 
 
-def getInstancesRegion(region, state):
-	client = boto3.client('ec2', region)
-	instances = client.describe_instances(
-		Filters=[
-			{
-				'Name': 'instance-state-name',
-				'Values': [state]
-			},
-		]
-	)
-	try:
-		return [instance["InstanceId"] for reservation in instances["Reservations"] for instance in reservation["Instances"]]
-	except:
-		return []
 
 
 
 def lambda_handler(event, context):
 	command = event["command"]
-	regions = event["regions"]
 	#log_bucket = event["log-bucket"]
-	#instances = event["instances"]
+	instances = event["instances"]
 	#s3 = boto3.resource('s3')
-	
 	log_data = ""
 	log_data_csv = "regions, instance_id, status\n"
     ###printing start time
-
-	log_data = log_data + "Script started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
-	print("Script started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
-
-	if command.lower() == "started":
+    
+	if command.lower() == "start":
+		log_data = log_data + "Start command started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
+		print("Start command started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
+        
 		## looping regions from list
-		log_data = log_data + "Starting following instances on regions \n"
-		print("Starting following instances on regions \n")
-
+        
 		for region in regions:
-			instances_region = getInstancesRegion(region, "stopped")
-			if instances_region == []:
+			instances_region = []
+			try:
+				instances_region = instances[region]
+			except:
 				continue
-			
+
 			client = boto3.client('ec2', region)
+			# start instances 
 			response = client.start_instances(InstanceIds=instances_region)
-			#print(f"Boto3 response: {response}")
 			for instance in instances_region:
 				log_data_csv += f"{region}, {instance}, started\n"
-				log_data = log_data + f"{region} {instance} \n"
-				print(f"{region} {instance} \n")
+			log_data = log_data + "Started instances in region "  + region + ": " + arrayToString(instances_region) + "\n"
+			print("Started instances in region "  + region + ": " + arrayToString(instances_region) + "\n")
+			
+		log_data = log_data + "Start command finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
+		print("Start command finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
-		log_data = log_data + "Started following instances on regions \n"
-		print("Started following instances on regions \n")
-	
-	elif command.lower() == "stopped":
-		log_data = log_data + "Stopping following instances on regions \n"
-		print("Stopping following instances on regions \n")
-
+	elif command.lower() == "stop":
+		log_data = log_data + "Stop command started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
+		print("Stop command started at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
 		for region in regions:
-			instances_region = getInstancesRegion(region, "running")
-			if instances_region == []:
+			instances_region = []
+			try:
+				instances_region = instances[region]
+			except:
 				continue
+
 			client = boto3.client('ec2', region)
 			response = client.stop_instances(InstanceIds=instances_region)
-			#print(f"Boto3 response: {response}")
 			for instance in instances_region:
 				log_data_csv += f"{region}, {instance}, stopped\n"
-				log_data = log_data + f"{region} {instance} \n"
-				print(f"{region} {instance} \n")
-		log_data = log_data + "Stopped following instances on regions \n"
-		print("Stopped following instances on regions \n")
+			log_data = log_data + "Stopped instances in region "  + region + ": " + arrayToString(instances_region) + "\n"
+			print("Stopped instances in region "  + region + ": " + arrayToString(instances_region) + "\n")
+			
+		log_data = log_data + "Stop command finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
+		print("Stop command finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
+
 	else:
 		log_data = log_data + "Command " + command + " not mapped."
 		print("Command " + command + " not mapped.")
-	
-	log_data = log_data + "Script finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
-	print("Script finished at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
 	sendLogFileEmail(log_data, log_data_csv)
+	#bucket = s3.Bucket(log_bucket)
+	#bucket.put_object(Key=log_file, Body=log_data)
+	#log_file_csv = log_file.replace(".log", ".csv")
+	#bucket.put_object(Key=log_file_csv, Body=log_data_csv)
 	return {"success": True, "message": "OK"}
+ 
+ 
+
 
 
 def main():
@@ -142,35 +126,56 @@ def main():
 	else:
 		parser = argparse.ArgumentParser()
 		#parser.add_argument("file", type=str, help="File name of JSON file")
-		parser.add_argument("-a", dest="command",  required=False, type=str, help="Command")
-		parser.add_argument("-r", dest="region",  required=False, type=str, help="Region")
-		parser.add_argument("-s", dest="start",   required=False, type=str, help="Receive this parameter to start")
+		parser.add_argument("-f", dest="file",  required=False, type=str, help="File name of JSON file")
+		parser.add_argument("-s", dest="start",  required=False, type=str, help="Receive this parameter to start")
 		parser.add_argument("-k", dest="stop",   required=False, type=str, help="Receive this parameter to stop")
+		#parser.add_argument("-b", dest="bucket", required=False, type=str, help="Bucket name to store log")
+		parser.add_argument("-u", dest="url",  required=False, type=str, help="URL of API Gateway")
+		parser.add_argument("-p", dest="start2",  required=False, type=str, help="Receive this parameter to start")
+		parser.add_argument("-q", dest="stop2",   required=False, type=str, help="Receive this parameter to stop")
 		args = parser.parse_args()
-
-		if args.start and args.start != "started":
-			print("Kindly parse correct key")
-			return
-		elif args.stop and args.stop != "stopped":
-			print("Kindly parse correct key")
-			return
-		elif not args.command or (args.command and args.command not in ["lambda_start", "lambda_stop"]) or (args.command == "lambda_start" and not args.start) or (args.command == "lambda_stop" and not args.stop):
-			print("Kindly parse correct key")
-			return
-
-		json_file = {}
-		if args.command == "lambda_start" or args.start is not None:
-			json_file["command"] = "started"
-			json_file["regions"] = [args.region]
+		
+		#If receive -u -p or -q
+		if args.url is not None:
+			url = args.url
+			json_file = {
+            	"instances": {
+            		"us-east-1": [
+						"i-07004f3a0e2f3a9ee"
+					],
+            		"us-west-2": [
+						"i-0893bf0d78af6d127"
+					]
+  				}
+			}
+			if args.start2 is not None:
+				json_file["command"] = "start"
+			elif args.stop2 is not None:
+				json_file["command"] = "stop"
+			
+			response = requests.post(url, json=json_file)
+			print(response.text)
+		#If receive -f -s -or -k
+		else:
+			json_file = json.loads(open(args.file, "rb").read())
+			if args.start is not None:
+				json_file["command"] = "start"
+			elif args.stop is not None:
+				json_file["command"] = "stop"
+			
 			lambda_handler(json_file, None)
-		elif args.command == "lambda_stop" or args.stop is not None:
-			json_file["command"] = "stopped"
-			json_file["regions"] = [args.region]
-			lambda_handler(json_file, None)
+			#if args.bucket is None:
+			#	print(f"Not received bucket name")
+			#	return None
+			#else:
+			#	json_file["bucket"] = args.bucket
 
+			
 
 if __name__ == '__main__':
 	main()
+##python start-stop-ec2.py -s start -f nodes.json
+##python start-stop-ec2.py -k start -f nodes.json
 
-##python ec2.py -p start
-##python ec2.py -q stop
+##python start-stop-ec2.py -p start -u 
+##python start-stop-ec2.py -p stop -u 
