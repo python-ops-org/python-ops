@@ -1,0 +1,47 @@
+# Global settings
+#---------------------------------------------------------------------
+global
+    log 127.0.0.1   local0
+    log 127.0.0.1   local1 debug
+    user haproxy
+    group haproxy
+    maxconn  16000
+    
+     
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+   log global
+   mode http
+   option httplog
+   option dontlognull
+   timeout connect 5000
+   timeout client 50000
+   timeout server 50000 
+#-------------------------
+
+log global
+   mode http
+   option httplog
+   option dontlognull
+   timeout connect 5000
+   timeout client 50000
+   timeout server 50000
+#---------------------------------------------------------------------
+# FrontEnd Configuration
+#---------------------------------------------------------------------
+frontend fe_http_sne_in
+bind *:80 
+option forwardfor
+default_backend be_default
+
+backend be_default
+mode http 
+option forwardfor
+#http-request add-header X-Forwarded-For %[src]
+
+http-request replace-header Host .* www.google.com
+server srv02 www.google.com 
+
