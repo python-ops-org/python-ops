@@ -1,49 +1,73 @@
-# Global settings
-#---------------------------------------------------------------------
 global
-    log 127.0.0.1   local0
-    log 127.0.0.1   local1 debug
-    user haproxy
-    group haproxy
-    maxconn  16000
-    
-     
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
 #---------------------------------------------------------------------
 # common defaults that all the 'listen' and 'backend' sections will
 # use if not designated in their block
 #---------------------------------------------------------------------
 defaults
-   log global
-   mode http
-   option httplog
-   option dontlognull
-   timeout connect 5000
-   timeout client 50000
-   timeout server 50000 
-#-------------------------
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
 
-log global
-   mode http
-   option httplog
-   option dontlognull
-   timeout connect 5000
-   timeout client 50000
-   timeout server 50000
-#---------------------------------------------------------------------
-# FrontEnd Configuration
-#---------------------------------------------------------------------
-frontend fe_http_sne_in
-bind *:80 
-option forwardfor
-default_backend be_default
 
-backend be_default
-mode http 
-option forwardfor
-#http-request add-header X-Forwarded-For %[src]
+frontend http_front
 
-http-request replace-header Host .* www.google.com
-server srv02 www.google.com 
+bind my-devops-power.com:443 ssl crt /etc/ssl/my-abc-power.com/my-abc-power.com.pem
+#bind *:80
+#redirect scheme https if !{ ssl_fc }
+   default_backend http_back
+
+backend http_back
+   balance roundrobin
+   http-request set-header Host www.google.com
+   server site google.com:443 ssl verify none check
+   
+
+stats enable
+        stats hide-version
+        stats refresh 30s
+        stats show-node
+        stats auth admin:admin
+        stats uri  /haproxy?stats
+
+
 
 #wget http://au1.mirror.crc.id.au/repo/el7-extra/x86_64/haproxy-2.0.14-4.el7.x86_64.rpm
 #wget http://au1.mirror.crc.id.au/repo/el7-extra/x86_64/haproxy-debuginfo-2.0.14-4.el7.x86_64.rpm
