@@ -1,5 +1,6 @@
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Attr
+
 
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("library")
@@ -12,14 +13,8 @@ def lambda_handler(event, context):
         data = response["Items"]
     else:
     #With filter
-        
-        response = table.query(
-            KeyConditionExpression=Key('books').eq(query)
-            )
+        response = table.scan(FilterExpression=Attr("books").eq(query))
         data = response["Items"]
-
-
-
     
     return "\n".join([str(value) for value in data])
 
@@ -41,5 +36,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
