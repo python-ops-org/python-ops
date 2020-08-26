@@ -1,0 +1,19 @@
+i want to make  get call in following manner
+
+https://85nyhc6z62.execute-api.us-east-1.amazonaws.com/dev/books/all/
+
+{'books': '1', 'author': 'doyel', 'title': 'diamond'}
+{'books': '2', 'title': 'nemesis', 'author': 'cristi'}
+{'books': '3', 'title': 'hogwart', 'author': 'rowling'}
+
+https://85nyhc6z62.execute-api.us-east-1.amazonaws.com/dev/books/1/
+
+{'books': '1', 'author': 'doyel', 'title': 'diamond'}
+
+https://85nyhc6z62.execute-api.us-east-1.amazonaws.com/dev/books/2/
+
+{'books': '2', 'title': 'nemesis', 'author': 'cristi'}
+
+https://85nyhc6z62.execute-api.us-east-1.amazonaws.com/dev/books/3/
+
+{'books': '3', 'title': 'hogwart', 'author': 'rowling'}

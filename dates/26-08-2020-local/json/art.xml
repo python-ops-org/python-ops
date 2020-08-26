@@ -1,0 +1,104 @@
+<content>
+  <data>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war</relativePath>
+      <text>Credit_Card_App-25.war</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:42.0 UTC</lastModified>
+      <sizeOnDisk>17747927</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.sha1</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.sha1</relativePath>
+      <text>Credit_Card_App-25.war.sha1</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:44.0 UTC</lastModified>
+      <sizeOnDisk>40</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.md5</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.md5</relativePath>
+      <text>Credit_Card_App-25.war.md5</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:45.0 UTC</lastModified>
+      <sizeOnDisk>32</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom</relativePath>
+      <text>Credit_Card_App-25.pom</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:45.0 UTC</lastModified>
+      <sizeOnDisk>3237</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.sha1</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.sha1</relativePath>
+      <text>Credit_Card_App-25.pom.sha1</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:46.0 UTC</lastModified>
+      <sizeOnDisk>40</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.md5</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.md5</relativePath>
+      <text>Credit_Card_App-25.pom.md5</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:46.0 UTC</lastModified>
+      <sizeOnDisk>32</sizeOnDisk>
+    </content-item>
+  </data>
+</content>
+<content>
+  <data>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war</relativePath>
+      <text>Credit_Card_App-25.war</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:42.0 UTC</lastModified>
+      <sizeOnDisk>17747927</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.sha1</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.sha1</relativePath>
+      <text>Credit_Card_App-25.war.sha1</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:44.0 UTC</lastModified>
+      <sizeOnDisk>40</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.md5</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.war.md5</relativePath>
+      <text>Credit_Card_App-25.war.md5</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:45.0 UTC</lastModified>
+      <sizeOnDisk>32</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom</relativePath>
+      <text>Credit_Card_App-25.pom</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:45.0 UTC</lastModified>
+      <sizeOnDisk>3237</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.sha1</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.sha1</relativePath>
+      <text>Credit_Card_App-25.pom.sha1</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:46.0 UTC</lastModified>
+      <sizeOnDisk>40</sizeOnDisk>
+    </content-item>
+    <content-item>
+      <resourceURI>https://dsnexus.uk.hibm.hsbc:8081/nexus/service/local/repositories/hsbc-internal-deploy-hosted_n2-prd-alm/content/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.md5</resourceURI>
+      <relativePath>/com/hsbc/ansible/demo/Credit_Card_App/25/Credit_Card_App-25.pom.md5</relativePath>
+      <text>Credit_Card_App-25.pom.md5</text>
+      <leaf>true</leaf>
+      <lastModified>2020-04-02 08:24:46.0 UTC</lastModified>
+      <sizeOnDisk>32</sizeOnDisk>
+    </content-item>
+  </data>
+</content>

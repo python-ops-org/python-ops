@@ -1,0 +1,4 @@
+EP,PORT,PASSWORD,USERNAME,DBNAME
+database-2.cjztjfnz2asu.us-east-1.rds.amazonaws.com,5432,xxxx,john,cloud
+192.168.56.9,5432,xyz
+

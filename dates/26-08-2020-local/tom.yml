@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: tom-test
+  namespace: bricks
+spec:
+  selector:
+    matchLabels:
+      app: tom
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tom
+    spec:
+      containers:
+      - name: tom-test
+        image: tomcat:8.0   
+      nodeSelector:
+        kubernetes.io/hostname: k8i    
+        
+        #nodeName: k8i
+        
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  labels:
+    app: tom
+  name: tom
+  namespace: bricks
+spec:
+  ports:
+  - nodePort: 30500
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: tom
+  type: NodePort
+
+
