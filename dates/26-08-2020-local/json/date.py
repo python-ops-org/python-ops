@@ -12,3 +12,9 @@ print datetime.date.today()
 from datetime import date, datetime
 fdate = datetime.strptime(fdate, '%Y/%m/%d').strftime('%d%m%y')
 print date.today()
+
+
+import arrow 
+  
+utc_time = arrow.utcnow() 
+print(utc_time) 
