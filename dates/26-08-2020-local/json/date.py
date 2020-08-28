@@ -40,3 +40,22 @@ t5 = subprocess.run(today, stdout=subprocess.PIPE, shell=True)
 t6=t5.stdout.rstrip()
 t7=str(t6,'utf-8')
 print(t7)
+
+
+#import subprocess
+import os
+import sys
+import re
+###yesterday
+
+yesterday='date -d "$date -2 days" +"%Y-%m-%d"'
+t1 = os.system(yesterday)
+####today
+
+today='date +"%Y-%m-%d"'
+t6 = os.system(today)
+
+
+
+
+
