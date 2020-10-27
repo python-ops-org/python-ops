@@ -7,7 +7,7 @@ import requests
 def lambda_handler(event, context):
     print(event)
 #def sns_test():
-    url = 'https://hooks.slack.com/services/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'
+    url = ''
     headers = {'Content-Type': 'application/json'}
     """
     json_data = {
