@@ -1,0 +1,27 @@
+{
+  "StartAt": "Bazinga",
+  "States": {
+    "Bazinga": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "arn:aws:lambda:ap-southeast-2:518815385770:function:errorTest:$LATEST",
+        "Payload": {
+          "Input.$": "$"
+        }
+      },
+      "Retry" : [
+        {
+          "ErrorEquals": [ "States.Timeout", "Lambda.Unknown" ],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.0
+        }
+      ],
+       "Next": "Fail"
+    },
+    "Fail": {
+      "Type": "Fail"
+    }
+  }
+}
