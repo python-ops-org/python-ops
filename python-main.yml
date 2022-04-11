@@ -58,9 +58,11 @@ https://github.com/python-ops-org/python-ops/blob/master/dates/26-08-2020-local/
 
 
 
+autopep8 -i host_tower_v.0.2.py
 
 
 
+apt install python-autopep8
 
 
 
