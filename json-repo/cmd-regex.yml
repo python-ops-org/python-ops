@@ -1,1 +1,14 @@
 
+kubectl get deployment calico-kube-controllers -n kube-system -o json
+kubectl get nodes -o=jsonpath='{.items[*]}'
+
+kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'
+kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.osImage}'
+kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}"
+kubectl get pv --sort-by=.spec.capacity.storage 
+kubectl get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage 
+kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.context.user=='aws-user')].name}" 
+kubectl -n kube-system get po nginx -o jsonpath="{.spec.containers[*].image}"
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
+sed -i 's/kube-contro1ler-manager/kube-controller-manager/g' /etc/kubernetes/manifests/kube-controller-manager.yaml
+
