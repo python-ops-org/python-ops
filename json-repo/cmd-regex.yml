@@ -12,3 +12,6 @@ kubectl -n kube-system get po nginx -o jsonpath="{.spec.containers[*].image}"
 kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
 sed -i 's/kube-contro1ler-manager/kube-controller-manager/g' /etc/kubernetes/manifests/kube-controller-manager.yaml
 
+
+
+
