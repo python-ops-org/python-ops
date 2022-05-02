@@ -13,5 +13,10 @@ kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP
 sed -i 's/kube-contro1ler-manager/kube-controller-manager/g' /etc/kubernetes/manifests/kube-controller-manager.yaml
 
 
+jq
 
+jq '.results[] | {name}'  host-tower.json
+jq '.results[1] | {name}'  host-tower.json
+jq -r '.results[0].name' host-tower.json
+jq -r '.results[].name' host-tower.json
 
