@@ -19,4 +19,11 @@ jq '.results[] | {name}'  host-tower.json
 jq '.results[1] | {name}'  host-tower.json
 jq -r '.results[0].name' host-tower.json
 jq -r '.results[].name' host-tower.json
+jq -r '.results[0].created' host-tower.json
+
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq -r '.results[].name'
+
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq '.'
+
 
