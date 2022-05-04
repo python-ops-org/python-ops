@@ -26,4 +26,16 @@ curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enable
 
 curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq '.'
 
+how to iterate over an array
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true |  jq '.[]'
+
+how to extract the name of each ip from each object in the array
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq -r '.results[].name'
+
+concise version and access the property directly on each object in the array
+curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq '.[].name'
+
+
+
+
 
