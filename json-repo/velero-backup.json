@@ -1,0 +1,67 @@
+{
+  "kind": "Backup",
+  "apiVersion": "velero.io/v1",
+  "metadata": {
+    "name": "whole-cluster-backup",
+    "namespace": "velero",
+    "uid": "9b50c4d9-2d81-4e78-afd4-a0f3aef300c0",
+    "resourceVersion": "348189",
+    "generation": 2,
+    "creationTimestamp": "2022-02-24T06:47:32Z",
+    "labels": {
+      "velero.io/storage-location": "default"
+    },
+    "annotations": {
+      "velero.io/source-cluster-k8s-gitversion": "v1.23.3",
+      "velero.io/source-cluster-k8s-major-version": "1",
+      "velero.io/source-cluster-k8s-minor-version": "23"
+    },
+    "managedFields": [
+      {
+        "manager": "velero",
+        "operation": "Update",
+        "apiVersion": "velero.io/v1",
+        "time": "2022-02-24T06:47:32Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {"f:spec":{".":{},"f:hooks":{},"f:includedNamespaces":{},"f:metadata":{},"f:ttl":{}},"f:status":{}}
+      },
+      {
+        "manager": "velero-server",
+        "operation": "Update",
+        "apiVersion": "velero.io/v1",
+        "time": "2022-02-24T06:47:32Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {"f:metadata":{"f:annotations":{".":{},"f:velero.io/source-cluster-k8s-gitversion":{},"f:velero.io/source-cluster-k8s-major-version":{},"f:velero.io/source-cluster-k8s-minor-version":{}},"f:labels":{".":{},"f:velero.io/storage-location":{}}},"f:spec":{"f:defaultVolumesToRestic":{},"f:storageLocation":{},"f:volumeSnapshotLocations":{}},"f:status":{"f:expiration":{},"f:formatVersion":{},"f:phase":{},"f:startTimestamp":{},"f:version":{}}}
+      }
+    ]
+  },
+  "spec": {
+    "metadata": {
+      
+    },
+    "includedNamespaces": [
+      "*"
+    ],
+    "ttl": "720h0m0s",
+    "hooks": {
+      
+    },
+    "storageLocation": "default",
+    "volumeSnapshotLocations": [
+      "velero-snap"
+    ],
+    "defaultVolumesToRestic": false
+  },
+  "status": {
+    "version": 1,
+    "formatVersion": "1.1.0",
+    "expiration": "2022-03-26T06:47:33Z",
+    "phase": "Completed",
+    "startTimestamp": "2022-02-24T06:47:33Z",
+    "completionTimestamp": "2022-02-24T06:47:44Z",
+    "progress": {
+      "totalItems": 415,
+      "itemsBackedUp": 415
+    }
+  }
+}
