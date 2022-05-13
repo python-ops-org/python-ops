@@ -43,6 +43,12 @@ concise version and access the property directly on each object in the array
 curl -sk --user admin:password -X GET http://192.168.56.159/api/v2/hosts/?enabled=true | jq '.[].name'
 
 
+kubectl get nodes -o=jsonpath='{.items[*].metadata.name}' > /opt/outputs/node_names.txt
+
+kubectl get nodes -o=jsonpath='{.items[*].metadata.name}' > /opt/outputs/node_names.txt
+
+kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.osImage}' > /opt/outputs/nodes_os.txt
+
 
 
 
