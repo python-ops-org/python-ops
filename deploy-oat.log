@@ -1,5 +1,5 @@
 app.kubernetes.io/name: label-pod
-app.kubernetes.io/instance: test-1a
+app.kubernetes.io/instance: test-2a
 app.kubernetes.io/version: "1.1.0"
 app.kubernetes.io/component: test
 app.kubernetes.io/managed-by: helm
