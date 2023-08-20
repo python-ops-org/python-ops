@@ -1,0 +1,3 @@
+sum by (container) (
+  rate(kube_pod_container_resource_cpu_usage_seconds_total{namespace="your-namespace", pod="your-pod-name"}[5m])
+)
