@@ -1,34 +1,43 @@
-version: '3.8'
-
+version: "3.8"
 services:
-  sonarqube:
-    image: sonarqube:latest
-    ports:
-      - "9000:9000"
-    environment:
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=sonar
-    networks:
-      - sonarqube-network
-    volumes:
-      - sonarqube-data:/opt/sonarqube/data
+    sonar:
+        container_name: sonar
+        image: sonarqube:latest
+        environment:
+            - SONARQUBE_JDBC_USERNAME=sonar
+            - SONARQUBE_JDBC_PASSWORD=sonarpass
+            - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+        volumes:
+            - sonar_conf:/var/opt/sonar/conf
+            - sonar_data:/var/opt/sonar/data
+            - sonar_extensions:/var/opt/sonar/extensions
+            - sonar_bundled-plugins:/var/opt/sonar/lib/bundled-plugins
+        networks:
+          - sonarqube-network       
+        ports:
+            - "9000:9000"
 
-  db:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-      - POSTGRES_DB=sonar
-    networks:
-      - sonarqube-network
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+    db:
+      container_name: sonar-db
+      image: postgres:latest
+      environment:
+         - POSTGRES_DB=sonar
+         - POSTGRES_USER=sonar
+         - POSTGRES_PASSWORD=sonar
+      volumes:
+         - sonar_database:/var/lib/postgresql
+         - sonar_database_data:/var/lib/postgresql/data
+      networks:
+        - sonarqube-network      
+      ports:
+        - "5432:5432"
 
 networks:
   sonarqube-network:
-
 volumes:
-  sonarqube-data:
-  postgres-data:
-
+    sonar_database_data:
+    sonar_bundled-plugins:
+    sonar_conf:
+    sonar_data:
+    sonar_database:
+    sonar_extensions:
