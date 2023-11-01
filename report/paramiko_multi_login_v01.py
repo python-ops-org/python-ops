@@ -1,3 +1,5 @@
+##python paramiko_multi_login_v01.py -i inv
+
 import paramiko
 import argparse
 
