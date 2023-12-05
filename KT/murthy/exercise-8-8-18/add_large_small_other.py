@@ -4,20 +4,18 @@ s = n1 + n2
 print(s)
 
 
-def small(arr):
-    if not arr:
+def small(n):
+    if not n:
         return None
-    
-    smallest = arr[0]
-    
-    for n in  arr:
-        if n < smallest:
-            smallest = n
-    return smallest
+    s = n[0]
+    for i in n:
+        if i < s:
+            s = i
+    return s
 
-n = [15,7,8,9]
-s = small(n)
-print(s)
+j = [10,8,9]
+k = small(j)
+print(k)
 
 
 
