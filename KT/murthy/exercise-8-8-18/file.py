@@ -1,12 +1,11 @@
 import csv
-import argparse
 
-def write_employee_details_to_csv(filename, data):
+def write_employee_details_to_csv(filename, emp_ids, emp_names):
     try:
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(['emp_id', 'emp_name'])  # Write header
-            for emp_id, emp_name in data:
+            for emp_id, emp_name in zip(emp_ids, emp_names):
                 writer.writerow([emp_id, emp_name])
         print(f"Employee details have been written to {filename}")
     except Exception as e:
@@ -24,8 +23,12 @@ def parse_csv_file(filename):
         print(f"An error occurred while parsing {filename}: {e}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Parse employee details CSV file.')
-    parser.add_argument('-f', '--filename', required=True, help='Path to the CSV file')
-    args = parser.parse_args()
+    # Hardcoded employee IDs and names
+    emp_ids = ["01", "02", "03"]
+    emp_names = ["sachin", "rahul", "virat"]
 
-    parse_csv_file(args.filename)
+    # Filename to write to
+    filename = "employees.csv"
+
+    write_employee_details_to_csv(filename, emp_ids, emp_names)
+    parse_csv_file(filename)
