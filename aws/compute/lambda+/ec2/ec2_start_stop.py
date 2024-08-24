@@ -2,15 +2,14 @@ import boto3
 import json
 
 def lambda_handler(event, context):
-    # Parse the JSON body from the Lambda event
+    # Parse the command and instances directly from the event
     try:
-        body = json.loads(event['body'])
-        action = body.get('command')
-        instances = body.get('instances', {})
+        action = event.get('command')
+        instances = event.get('instances', {})
     except Exception as e:
         return {
             'statusCode': 400,
-            'body': json.dumps({'error': 'Invalid JSON body'})
+            'body': json.dumps({'error': 'Invalid event structure'})
         }
 
     # Initialize a list to store formatted output
@@ -44,5 +43,5 @@ def lambda_handler(event, context):
     # Return a JSON response with the formatted output
     return {
         'statusCode': 200,
-        'body': response_body
+        'body': json.dumps({'message': response_body})
     }
