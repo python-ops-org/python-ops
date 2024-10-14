@@ -18,10 +18,14 @@ print rev(21)
 """
 def swap(s1, s2):
    return s2, s1
-s1 = 'a'
-s2 = 'b'
+
+s1 = 'chakraborty'
+s2 = 'sudipta'
+
 s1, s2 = swap(s1, s2)
-print s1, s2
+
+print(s1, s2)
+
 """
 
 
