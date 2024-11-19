@@ -4,13 +4,13 @@ import subprocess
 servers = [
     {
         "host": "127.0.0.1",
-        "user": "root",
-        "password": "iis123"
+        "user": "xxx",
+        "password": "xxxx"
     },
     {
-        "host": "192.168.0.205",
-        "user": "root",
-        "password": "iis123"
+        "host": "192.168.15.654",
+        "user": "xxx",
+        "password": "xxxx"
     }
 ]
 
