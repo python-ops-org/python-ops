@@ -15,59 +15,56 @@ def ssh_execute_command(hostname, username, password, command):
         stdin, stdout, stderr = client.exec_command(command)
 
         # Read the output
-        output = stdout.read().decode("utf-8")
+        output = stdout.read().decode("utf-8").strip()  # Strip leading/trailing whitespaces
+        error = stderr.read().decode("utf-8").strip()
 
         # Close the SSH connection
         client.close()
 
-        return output.strip()  # Strip leading/trailing whitespaces
+        return output if not error else f"Error: {error}"  # Return output or error message
     except Exception as e:
-        return str(e)
-
+        return f"Error: {str(e)}"
 
 # List of servers
 servers = [
     {
         "ansible_ssh_host": "127.0.0.1",
-        "ansible_ssh_user": "root",
-        "ansible_ssh_password": "iis123"
+        "ansible_ssh_user": "xxxx",
+        "ansible_ssh_password": "xxxx"
     },
     {
-        "ansible_ssh_host": "192.168.0.205",
-        "ansible_ssh_user": "root",
-        "ansible_ssh_password": "iis123"
+        "ansible_ssh_host": "xxxxx",
+        "ansible_ssh_user": "xxxxx",
+        "ansible_ssh_password": "xxxxx"
     }
 ]
 
-# Commands to execute
-memory_command = "free -m | sed -n '2p' | awk '{print $3;}'"
-cpu_command = (
-    "top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\([0-9.]*\\)%* id.*/\\1/' | awk '{print 100 - $1\"%\"}'"
-)
+# Commands dictionary
+COMMANDS = {
+    'memory': "free -m | sed -n '2p' | tr -s ' ' | cut -d' ' -f3",
+    'disk': "df -h | grep '/$' | tr -s ' ' | cut -d' ' -f3"
+}
 
 # Print the header
-print("Host\t\tMemory_Usage\tCPU_Usage")
+print(f"{'Host':<15}{'Memory Usage (MB)':<20}{'Disk Usage':<20}")
 
-# Iterate through the servers and fetch memory and CPU usage
+# Iterate through the servers and fetch memory and disk usage
 for server in servers:
-    memory_output = ssh_execute_command(
-        server["ansible_ssh_host"],
-        server["ansible_ssh_user"],
-        server["ansible_ssh_password"],
-        memory_command
-    )
-    cpu_output = ssh_execute_command(
-        server["ansible_ssh_host"],
-        server["ansible_ssh_user"],
-        server["ansible_ssh_password"],
-        cpu_command
-    )
-
-    # Use "ansible_ssh_host" as hostname for the output
     hostname = server["ansible_ssh_host"]
     
-    # Format the output
-    output = f"{hostname}\t{memory_output}\t\t{cpu_output}"
+    memory_output = ssh_execute_command(
+        hostname,
+        server["ansible_ssh_user"],
+        server["ansible_ssh_password"],
+        COMMANDS['memory']
+    )
+    
+    disk_output = ssh_execute_command(
+        hostname,
+        server["ansible_ssh_user"],
+        server["ansible_ssh_password"],
+        COMMANDS['disk']
+    )
 
-    # Print the output
-    print(output)
+    # Print formatted output
+    print(f"{hostname:<15}{memory_output:<20}{disk_output:<20}")
