@@ -34,3 +34,13 @@ https://codescracker.com/python/program/python-program-swap-two-numbers.htm
 for i in range(6,0,-1):
     print(i * '' + (6-i) * '*')
 
+
+
+
+
+
+
+a = "kohlivirat"
+b = a[::-1]
+print(b)
+
