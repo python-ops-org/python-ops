@@ -40,7 +40,44 @@ for i in range(6,0,-1):
 
 
 
+
+
+
+
+
+1.
+
+
+def swap(a, b):
+    return b,a
+
+a = 'virat'
+b = 'kohli'
+
+a, b = swap(a, b)
+print(a, b)
+
+
+2.
+
 a = "kohlivirat"
 b = a[::-1]
 print(b)
+
+3.
+
+n = int(input("enter number:"))
+r = int(str(n)[::-1])
+print(r)
+
+4.
+
+from collections import Counter
+
+def double(s):
+    return [char for char, count in Counter(s).items() if count > 1 ]
+s="linuxi"
+print(double(s))
+
+
 
