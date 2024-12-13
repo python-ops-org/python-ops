@@ -1,3 +1,7 @@
+
+
+```
+
 import boto3
 import argparse
 
@@ -35,3 +39,6 @@ if __name__ == "__main__":
     
     # Call the ec2_handle function
     ec2_handle(args.action, args.region)
+
+
+```
