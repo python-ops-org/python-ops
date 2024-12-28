@@ -6,6 +6,21 @@ print(int(r))
 
 ```
 
+```
+
+n = [1,2,3,4,5]
+n.reverse()
+print(n)
+
+n = 12345
+n = int(str(n)[::-1])
+print(n)
+
+list = [1,2,3,45,6,7,8,9]
+s_list = list[2:6]
+print(s_list)
+```
+
 
 ```
 def rev(x):
