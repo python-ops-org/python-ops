@@ -107,7 +107,18 @@ print(double(s))
 
 ```
 
+```
+double() {
+    local s="$1"
+    echo "$s" | grep -o . | sort | uniq -d
+}
 
+# Input string
+s="linuxi"
+double "$s"
+
+
+```
 
 
 - [blog-01](https://codescracker.com/python/program/python-program-swap-two-numbers.htm)
