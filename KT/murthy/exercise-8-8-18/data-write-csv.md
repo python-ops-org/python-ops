@@ -1,3 +1,6 @@
+
+```
+
 import csv
 
 file = 'test.csv'
@@ -17,3 +20,4 @@ f.close()  # Don't forget to close the file
 
 print(f"Data written to {file}")
 
+```
