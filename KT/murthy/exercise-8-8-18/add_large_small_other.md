@@ -16,8 +16,11 @@ print(r)
 
 
 
+
+## Python Script to find the smallest number in a list
+
 ```
-# Function to find the smallest number in a list
+
 def find_smallest_number(numbers):
     if not numbers:  # Check if the list is empty
         return None
@@ -34,7 +37,7 @@ print(f"The smallest number is: {smallest_number}")
 
 ```
 
-## Function to find the smallest number in a list
+## Bash Script to find the smallest number in a list
 
 ```
 
