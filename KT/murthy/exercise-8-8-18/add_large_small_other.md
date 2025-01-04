@@ -34,9 +34,13 @@ print(f"The smallest number is: {smallest_number}")
 
 ```
 
+## Function to find the smallest number in a list
+
+```
+
 #!/bin/bash
 
-# Function to find the smallest number in a list
+
 find_smallest_number() {
     local numbers=("$@")
     local smallest="${numbers[0]}"
@@ -50,10 +54,16 @@ find_smallest_number() {
     echo "$smallest"
 }
 
-# Example usage
+
 numbers=(45 67 23 89 12 55)
 smallest_number=$(find_smallest_number "${numbers[@]}")
 echo "The smallest number is: $smallest_number"
+
+```
+
+
+
+
 
 
 
