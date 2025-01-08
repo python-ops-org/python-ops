@@ -30,6 +30,13 @@
 
 ```
 
+![while-loop](images/while.jpg)
+
+
+
+
+
+
 
 ```
 # Example while loop
@@ -40,5 +47,7 @@ while count < 5:
 ```
 
 
+
+![whileless-loop](images/whileless.jpg)
 
 
