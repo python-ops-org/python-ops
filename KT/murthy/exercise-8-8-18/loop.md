@@ -137,7 +137,7 @@ print ("Good bye!")
 ```
 
 
-## break Statement with while loop
+break Statement with while loop
 -----------------------------------
 ```
 var = 10                   
@@ -165,6 +165,81 @@ else:
    print ('number not found in list')
 
 ```
+
+
+
+
+Continue Definition
+--------------------
+
+Python continue statement is used to skip the execution of the program block and returns the control to the beginning 
+of the current loop to start the next iteration. When encountered, the loop starts next iteration 
+without executing the remaining statements in the current iteration
+
+
+
+Syntax of continue Statement
+-----------------------------
+
+![continue](images/loop_continue.jpg)
+
+
+
+
+
+```
+
+looping statement:
+   condition check:
+      continue
+
+
+```
+
+
+
+
+
+
+
+Python continue Statement with for Loop
+----------------------------------------
+
+```
+for letter in 'Python':
+   if letter == 'h':
+      continue
+   print ('Current Letter :', letter)
+print ("Good bye!")
+
+
+```
+
+Python continue Statement with while Loop
+-----------------------------------------
+
+
+```
+
+num = 60
+print ("Prime factors for: ", num)
+d=2
+while num > 1:
+   if num%d==0:
+      print (d)
+      num=num/d
+      continue
+   d=d+1
+
+
+```
+
+
+
+
+
+
+
 
 
 
