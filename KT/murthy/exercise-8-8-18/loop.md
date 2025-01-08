@@ -48,6 +48,6 @@ while count < 5:
 
 
 
-![whileless-loop](images/whileless.jpg)
+![whileless-loop](images/whileelse.jpg)
 
 
