@@ -350,6 +350,133 @@ while True: pass
 
 
 
+Syntax of Python for Loop
+--------------------------
+
+```
+for iterating_var in sequence:
+   statement(s)
+
+```
+
+Flowchart of Python for Loop
+-----------------------------
+
+
+
+
+
+Python for Loop with Strings
+-----------------------------
+
+
+```
+zen = '''
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+'''
+for char in zen:
+   if char not in 'aeiou':
+      print (char, end='')
+
+```
+
+
+Python for Loop with Tuples
+----------------------------
+
+```
+numbers = (34,54,67,21,78,97,45,44,80,19)
+total = 0
+for num in numbers:
+   total += num
+print ("Total =", total)
+
+```
+
+Python for Loop with Lists
+----------------------------
+
+```
+numbers = [34,54,67,21,78,97,45,44,80,19]
+total = 0
+for num in numbers:
+   if num%2 == 0:
+      print (num)
+
+```
+
+Python for Loop with Range Objects
+-------------------------------------
+
+```
+for num in range(5):
+   print (num, end=' ')
+print()
+for num in range(10, 20):
+   print (num, end=' ')
+print()
+for num in range(1, 10, 2):
+   print (num, end=' ')
+
+```
+
+Python for Loop with Dictionaries
+-----------------------------------
+
+```
+
+numbers = {10:"Ten", 20:"Twenty", 30:"Thirty",40:"Forty"}
+for x in numbers:
+   print (x)
+
+```
+
+
+```
+numbers = {10:"Ten", 20:"Twenty", 30:"Thirty",40:"Forty"}
+for x in numbers:
+   print (x,":",numbers[x])
+
+```
+
+```
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    continue
+  print(x)
+
+```
+
+```
+adj = ["red", "big", "tasty"]
+fruits = ["apple", "banana", "cherry"]
+
+for x in adj:
+  for y in fruits:
+    print(x, y)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
