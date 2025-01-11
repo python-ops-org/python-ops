@@ -235,7 +235,116 @@ while num > 1:
 ```
 
 
+Python Nested for Loop
+-----------------------
 
+The for loop with one or more inner for loops is called nested for loop. A for loop is used to loop over the items of any sequence, 
+such as a list, tuple or a string and performs the same action on each item of the sequence.
+
+
+Python Nested for Loop Syntax
+------------------------------
+
+```
+
+for iterating_var in sequence:
+   for iterating_var in sequence:
+      statements(s)
+   statements(s)
+
+```
+
+
+
+Python Nested for Loop Example
+-------------------------------
+
+```
+for iterating_var in sequence:
+   for iterating_var in sequence:
+      statements(s)
+   statements(s)
+
+```
+
+
+
+Python Nested For Loop Example
+-------------------------------
+
+
+```
+months = ["jan", "feb", "mar"]
+days = ["sun", "mon", "tue"]
+
+for x in months:
+  for y in days:
+    print(x, y)
+
+print("Good bye!")
+
+
+
+```
+
+
+
+Python Nested while Loop
+--------------------------
+
+The while loop having one or more inner while loops are nested while loop. A while loop is used to 
+repeat a block of code for an unknown number of times until the specified boolean expression becomes TRUE.
+
+```
+
+while expression:
+   while expression:
+      statement(s)
+   statement(s)
+
+```
+
+
+Python Nested while Loop Example
+----------------------------------
+
+
+```
+i = 2
+while(i < 25):
+   j = 2
+   while(j <= (i/j)):
+      if not(i%j): break
+      j = j + 1
+   if (j > i/j) : print (i, " is prime")
+   i = i + 1
+
+print ("Good bye!")
+
+```
+
+Python pass Statement
+------------------------
+Python pass statement is used when a statement is required syntactically but you do not want any command or code to execute. 
+It is a null which means nothing happens when it executes. This is also useful in places where piece of code will be added later, 
+but a placeholder is required to ensure the program runs without errors.
+
+Example of pass Statement
+---------------------------
+
+```
+for letter in 'Python':
+   if letter == 'h':
+      pass
+      print ('This is pass block')
+   print ('Current Letter :', letter)
+print ("Good bye!")
+
+```
+Dumpy Infinite Loop with pass Statement
+----------------------------------------
+
+while True: pass 
 
 
 
