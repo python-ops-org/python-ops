@@ -143,6 +143,30 @@ double "$s"
 
 ```
 
+```
+
+p=`ps -ef | pgrep apache2 | wc -l`
+if [-z "$p"]
+then
+echo "critical"
+exit 2
+else
+if ["$p" -le "5"]
+then
+echo "warning"
+exit 1
+else
+echo "no of running apache:""$p";
+exit 0
+fi
+fi
+
+```
+
+
+
+
+
 
 - [blog-01](https://codescracker.com/python/program/python-program-swap-two-numbers.htm)
   
