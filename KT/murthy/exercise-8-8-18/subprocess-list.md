@@ -1,3 +1,6 @@
+
+```
+
 import subprocess
 
 # List of servers
@@ -39,3 +42,6 @@ for server in servers:
     disk = run_ssh_command(server, COMMANDS['disk'])
     
     print(f"{server['host']} {memory} {disk}")
+
+
+```
