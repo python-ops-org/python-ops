@@ -207,3 +207,226 @@ fi
 
 
 ```
+
+```
+
+#!/bin/bash
+read -p "Enter the 1st file name: " file1
+read -p "Enter the 2nd file name: " file2
+if [ ! -f $file1 ] || [ ! -f $file2 ]
+then
+echo "Error! One of the files does not exists."
+exit 1
+fi
+if cmp -s "$file1" "$file2"
+then
+echo "The Files $file1 and $file2 are identical."
+else
+echo "The Files $file1 and $file2 are different."
+fi
+
+```
+
+```
+
+#!/bin/bash
+read -p "Enter filename: " filename
+read -p "Enter a pattern to search for: " pattern
+grep -w -n $pattern $filename
+if [ $? -eq 1 ]; then
+echo "Pattern did not match."
+fi
+
+```
+```
+
+Grade() {
+score=$1
+if (( $score >= 80 )); then
+grade="A+"
+elif (( $score >= 70 )); then
+grade="A"
+elif (( $score >= 60 )); then
+grade="B"
+elif (( $score >= 50 )); then
+grade="C"
+elif (( $score >= 40 )); then
+
+
+grade="D"
+else
+grade="F"
+fi
+echo "The grade for mark $s is $grade"
+}
+read -p "Enter a score between 1-100:" s
+Grade $s
+
+```
+
+
+```
+#!/bin/bash
+Area() {
+width=$1
+height=$2
+area=$(($width * $height))
+echo "Area of the rectangle is: $area"
+
+}
+read -p "Enter height and width of the ractangle:" h w
+Area $h $w
+
+```
+
+```
+
+#!/bin/bash
+Prime () {
+num=$1
+if [ $num -lt 2 ]
+then
+echo "The number $num is Not Prime"
+return
+fi
+for (( i=2; i<=$num/2; i++ ))
+do
+if [ $((num%i)) -eq 0 ]
+then
+
+echo "The number $num is Not Prime"
+return
+fi
+done
+echo "The number $num is Prime"
+}
+read -p "Enter a number: " num
+Prime "$num"
+
+```
+
+```
+
+#!/bin/bash
+Palindrome () {
+s=$1
+if [ "$(echo $s | rev)" == "$str" ]
+then
+echo "The string is a Palindrome"
+else
+echo "The string is not a palindrome"
+fi
+}
+read -p "Enter a string: " str
+Palindrome "$str"
+
+```
+
+```
+
+#!/bin/bash
+arr=(24 27 84 11 99)
+echo "Given array: ${arr[*]}"
+s=100000
+l=0
+for num in "${arr[@]}"
+do
+if [ $num -lt $s ]
+then
+s=$num
+fi
+if [ $num -gt $l ]
+then
+l=$num
+fi
+done
+echo "The smallest element: $s"
+echo "The largest: $l"
+
+```
+
+```
+
+arr=("mango" "grape" "apple" "cherry" "orange")
+for item in "${arr[@]}"; do
+echo $item
+done
+
+```
+
+```
+
+#!/bin/bash
+read -p "Enter a number: " num
+sum=0
+for (( i=1; i<=$num; i++ ))
+do
+sum=$((sum + i))
+done
+echo "Sum of first $num numbers: $sum"
+
+```
+
+```
+
+
+#!/bin/bash
+read -p "Enter a number: " num
+
+temp=1
+for (( i=1; i<=$num; i++ ))
+do
+temp=$((temp*i))
+done
+echo "The factorial of $num is: $temp"
+
+```
+
+```
+
+#!/bin/bash
+for (( i=1; i<=10; i++ ))
+do
+if [ $((i%2)) == 0 ]
+then
+echo $i
+fi
+done
+
+```
+
+```
+#!/bin/bash
+n=5
+until [ $n == 0 ]
+
+do
+echo $n
+n=$((n-1))
+done
+
+```
+
+```
+
+#!/bin/bash
+str="Linuxsimply"
+str=$(echo "$str" | rev)
+echo "The reversed string: $str"
+
+```
+
+```
+
+#!/bin/bash
+read -p "Enter a string: " str
+echo "Converted String:" $str | tr '[:upper:]' '[:lower:]'
+
+```
+
+
+
+
+
+
+
