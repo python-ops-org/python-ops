@@ -160,6 +160,122 @@ print (v1 + v2)
 
 ```
 
+Python constructor is an instance method in a class, that is automatically called whenever 
+a new object of the class is created.
+
+Default Constructor in Python
+-------------------------------
+The Python constructor which does not accept any parameter other than self is called as default constructor.
+
+
+```
+
+class Employee:
+   'Common base class for all employees'
+   def __init__(self):
+      self.name = "Bhavana"
+      self.age = 24
+
+e1 = Employee()
+print ("Name: {}".format(e1.name))
+print ("age: {}".format(e1.age))
+
+```
+
+Parameterized Constructor
+--------------------------
+
+
+```
+class Employee:
+   'Common base class for all employees'
+   def __init__(self, name, age):
+      self.name = name
+      self.age = age
+
+e1 = Employee("Bhavana", 24)
+e2 = Employee("Bharat", 25)
+
+print ("Name: {}".format(e1.name))
+print ("age: {}".format(e1.age))
+print ("Name: {}".format(e2.name))
+print ("age: {}".format(e2.age))
+
+
+
+```
+
+```
+
+class Employee:
+   'Common base class for all employees'
+   def __init__(self, name="Bhavana", age=24):
+      self.name = name
+      self.age = age
+
+e1 = Employee()
+e2 = Employee("Bharat", 25)
+
+print ("Name: {}".format(e1.name))
+print ("age: {}".format(e1.age))
+print ("Name: {}".format(e2.name))
+print ("age: {}".format(e2.age))
+
+```
+
+
+Python Multiple Constructors
+------------------------------
+
+
+```
+class Student:
+   def __init__(self, *args):
+      if len(args) == 1:
+         self.name = args[0]
+        
+      elif len(args) == 2:
+         self.name = args[0]
+         self.age = args[1]
+        
+      elif len(args) == 3:
+         self.name = args[0]
+         self.age = args[1]
+         self.gender = args[2]
+            
+st1 = Student("Shrey")
+print("Name:", st1.name)
+st2 = Student("Ram", 25)
+print(f"Name: {st2.name} and Age: {st2.age}")
+st3 = Student("Shyam", 26, "M")
+print(f"Name: {st3.name}, Age: {st3.age} and Gender: {st3.gender}")
+
+```
+
+
+
+Python - Instance Methods
+---------------------------
+
+
+```
+class Employee:
+   def __init__(self, name="Sachin", score=141):
+      self.name = name
+      self.score = score
+   def displayEmployee(self):
+      print ("Name : ", self.name, ", score: ", self.score)
+
+e1 = Employee()
+e2 = Employee("Rahul", 101)
+
+e1.displayEmployee()
+e2.displayEmployee()
+
+
+
+
+```
 
 
 
