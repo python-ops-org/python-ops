@@ -1,6 +1,6 @@
 
- classmethod() which transforms an instance method to a class method which can be called with 
- the reference to the class only and not the object.
+ classmethod() which transforms an instance method to a class method 
+ which can be called with the reference to the class only and not the object.
  
  Employee class, define a showcount() instance method with the "self" argument.
  
@@ -269,6 +269,114 @@ e1.age = 23
 print ("Name:", e1.name, "age:", e1.age)
 
 ```
+
+
+method overriding refers to defining a method in a subclass with the same name as a method in its superclass.
+
+```
+# define parent class
+class Parent: 
+   def myMethod(self):
+      print ('Calling parent method')
+
+# define child class
+class Child(Parent): 
+   def myMethod(self):
+      print ('Calling child method')
+
+# instance of child
+c = Child() 
+# child calls overridden method
+c.myMethod()
+
+```
+
+
+```
+class Employee:
+   def __init__(self,nm, sal):
+      self.name=nm
+      self.salary=sal
+   def getName(self):
+      return self.name
+   def getSalary(self):
+      return self.salary
+
+class SalesOfficer(Employee):
+   def __init__(self,nm, sal, inc):
+      super().__init__(nm,sal)
+      self.incnt=inc
+   def getSalary(self):
+      return self.salary+self.incnt
+
+e1=Employee("Rajesh", 9000)
+print ("Total salary for {} is Rs {}".format(e1.getName(),e1.getSalary()))
+s1=SalesOfficer('Kiran', 10000, 1000)
+print ("Total salary for {} is Rs {}".format(s1.getName(),s1.getSalary()))
+
+
+```
+
+
+Method overloading is a feature of object-oriented programming where a 
+class can have multiple methods with the same name but different parameters
+
+
+
+```
+
+class example:
+   def add(self, a, b):
+      x = a+b
+      return x
+   def add(self, a, b, c):
+      x = a+b+c
+      return x
+
+obj = example()
+
+print (obj.add(10,20,30))
+print (obj.add(10,20)
+
+```
+
+
+```
+
+class example:
+   def add(self, a = None, b = None, c = None):
+      x=0
+      if a !=None and b != None and c != None:
+         x = a+b+c
+      elif a !=None and b != None and c == None:
+         x = a+b
+      return x
+
+obj = example()
+
+print (obj.add(10,20,30))
+print (obj.add(10,20))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
