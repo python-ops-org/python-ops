@@ -12,6 +12,138 @@ print (array1[2])
 
 ```
 
+```
+
+import array as arr
+
+# creating an array with integer type
+a = arr.array('i', [1, 2, 3])
+print (type(a), a)
+
+# creating an array with char type
+a = arr.array('u', 'BAT')
+print (type(a), a)
+
+# creating an array with float type
+a = arr.array('d', [1.1, 2.2, 3.3])
+print (type(a), a)
+
+```
+
+```
+
+from array import *
+array1 = array('i', [10,20,30,40,50])
+print (array1[0])
+print (array1[2])
+
+```
+
+Insertion Operation
+
+```
+from array import *
+array1 = array('i', [10,20,30,40,50])
+array1.insert(1,60)
+for x in array1:
+ print(x)
+
+
+```
+
+Search Operation
+
+```
+from array import *
+array1 = array('i', [10,20,30,40,50])
+print (array1.index(40))
+
+```
+
+Update Operation
+
+```
+
+from array import *
+array1 = array('i', [10,20,30,40,50])
+array1[2] = 80
+for x in array1:
+   print(x)
+
+
+```
+
+Accessing array items in Python
+
+
+Using indexing
+Using iteration
+Using enumerate() function
+
+
+```
+
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+#indexing
+print (numericArray[0])
+print (numericArray[1])
+print (numericArray[2])
+
+
+```
+
+
+Using iteration
+
+
+```
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+# iteration through for loop
+for item in numericArray:
+   print(item)
+
+
+```
+
+
+Accessing a range of array items in Python
+
+
+```
+
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+# slicing operation
+print (numericArray[2:])
+print (numericArray[0:3])
+
+```
+
+```
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+# use of enumerate() function
+for loc, val in enumerate(numericArray):
+    print(f"Index: {loc}, value: {val}")
+
+
+```
+
+
 
 ```
 
@@ -26,3 +158,10 @@ echo ${myarray[@]:1:3}
 echo ${myarray[@]:1:5}
 
 ```
+
+
+
+
+
+
+
