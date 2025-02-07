@@ -143,6 +143,85 @@ for loc, val in enumerate(numericArray):
 
 ```
 
+Adding Elements to Python Array
+
+```
+import array as arr
+a = arr.array('i', [1, 2, 3])
+a.append(10)
+print (a)
+
+```
+
+Using insert() method
+
+```
+import array as arr
+a = arr.array('i', [1, 2, 3])
+a.insert(1,20)
+print (a)
+
+
+```
+
+Using extend() method
+
+```
+import array as arr
+a = arr.array('i', [1, 2, 3, 4, 5])
+b = arr.array('i', [6,7,8,9,10])
+a.extend(b)
+print (a)
+
+
+```
+
+Remove First Occurrence
+
+
+```
+
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+# before removing array
+print ("Before removing:", numericArray)
+# removing array
+numericArray.remove(311)
+# after removing array
+print ("After removing:", numericArray)
+
+
+```
+
+
+Remove Items from Specific Indices
+
+```
+
+import array as arr
+
+# creating array
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+
+# before removing array
+print ("Before removing:", numericArray)
+# removing array
+numericArray.pop(3)
+# after removing array
+print ("After removing:", numericArray)
+
+```
+
+
+
+
+
+
+
+
 
 
 ```
