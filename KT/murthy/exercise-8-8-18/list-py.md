@@ -122,6 +122,307 @@ print ("List after deleting: ", list1)
 
 ```
 
+Loop Through List Items with For Loop
+---------------------------------------
+
+
+
+```
+
+lst = [25, 12, 10, -21, 10, 100]
+for num in lst:
+   print (num, end = ' ')
+
+```
+
+
+Loop Through List Items with While Loop
+----------------------------------------
+
+```
+my_list = [1, 2, 3, 4, 5]
+index = 0
+
+while index < len(my_list):
+   print(my_list[index])
+   index += 1
+
+```
+
+Loop Through List Items with Index
+--------------------------------------
+
+
+```
+lst = [25, 12, 10, -21, 10, 100]
+indices = range(len(lst))
+for i in indices:
+   print ("lst[{}]: ".format(i), lst[i])
+
+```
+
+Iterate using the enumerate() Function
+----------------------------------------
+
+```
+fruits = ["apple", "banana", "cherry"]
+for index, fruit in enumerate(fruits):
+   print(index, fruit)
+
+```
+
+Sorting List in Lexicographical Order
+---------------------------------------
+
+```
+list1 = ['physics', 'Biology', 'chemistry', 'maths']
+print ("list before sort:", list1)
+list1.sort()
+print ("list after sort : ", list1)
+
+```
+
+Example of Sorting List in Numerical Order
+------------------------------------------
+
+```
+list2 = [10,16, 9, 24, 5]
+print ("list before sort", list2)
+list2.sort()
+print ("list after sort : ", list2)
+
+
+```
+
+Sorting Lists Using sorted() Method
+-------------------------------------
+
+
+```
+numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+# Sorting in descending order
+sorted_numbers_desc = sorted(numbers, reverse=True)
+print(sorted_numbers_desc) 
+
+```
+
+Sorting List Items with Callback Function
+--------------------------------------------
+
+```
+list1 = ['Physics', 'biology', 'Biomechanics', 'psychology']
+print ("list before sort", list1)
+list1.sort(key=str.lower)
+print ("list after sort : ", list1)
+
+```
+
+Join Lists Using Concatenation Operator
+----------------------------------------
+
+```
+# Two lists to be joined
+L1 = [10,20,30,40]
+L2 = ['one', 'two', 'three', 'four']
+# Joining the lists
+joined_list = L1 + L2
+
+# Printing the joined list
+print("Joined List:", joined_list)
+
+```
+
+Join Lists Using append() Function
+------------------------------------
+
+```
+
+# List to which elements will be appended
+list1 = ['Fruit', 'Number', 'Animal']
+# List from which elements will be appended
+list2 = ['Apple', 5, 'Dog']
+# Joining the lists using the append() function
+for element in list2:
+    list1.append(element)
+# Printing the joined list
+print("Joined List:", list1)
+
+```
+
+Python program to find unique numbers in a given list.
+-------------------------------------------------------
+
+```
+
+L1 = [1, 9, 1, 6, 3, 4, 5, 1, 1, 2, 5, 6, 7, 8, 9, 2]
+L2 = []
+for x in L1:
+   if x not in L2:
+      L2.append(x)
+print (L2)
+
+```
+
+Python program to find sum of all numbers in a list.
+------------------------------------------------------
+
+```
+L1 = [1, 9, 1, 6, 3, 4]
+ttl = 0
+for x in L1:
+   ttl+=x
+print ("Sum of all numbers Using loop:", ttl)
+ttl = sum(L1)
+print ("Sum of all numbers sum() function:", ttl)
+
+```
+
+Python program to create a list of 5 random integers.
+------------------------------------------------------
+
+```
+import random
+L1 = []
+for i in range(5):
+   x = random.randint(0, 100)
+   L1.append(x)
+print (L1)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
