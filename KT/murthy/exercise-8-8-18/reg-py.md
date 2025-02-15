@@ -157,7 +157,7 @@ x = re.search(r"\bS\w+", txt)
 print(x.group())
 
 ```
-
+"[a-m]" : A set of characters
 
 ```
 import re
@@ -171,6 +171,9 @@ print(x)
 
 ```
 
+"\d": Signals a special sequence 
+
+
 ```
 import re
 
@@ -183,7 +186,7 @@ print(x)
 
 
 ```
-
+"he..o": Any character (except newline character)	
 
 ```
 
@@ -197,6 +200,9 @@ x = re.findall("he..o", txt)
 print(x)
 
 ```
+
+"^hello": Starts with	
+
 
 ```
 import re
@@ -213,6 +219,8 @@ else:
 
 
 ```
+"planet$": Ends with
+
 
 ```
 import re
@@ -229,6 +237,10 @@ else:
 
 ```
 
+"he.*o": Zero or more occurrences
+
+
+
 ```
 import re
 
@@ -242,6 +254,10 @@ print(x)
 
 ```
 
++: One or more occurrences
+
+
+
 ```
 import re
 
@@ -254,6 +270,8 @@ x = re.findall("he.+o", txt)
 print(x)
 
 ```
+?: Zero or one occurrences
+
 
 
 ```
@@ -273,19 +291,12 @@ print(x)
 
 ```
 
-```
 
-import re
 
-txt = "hello planet"
 
-#Search for a sequence that starts with "he", followed excactly 2 (any) characters, and an "o":
 
-x = re.findall("he.{2}o", txt)
+{},"he.{2}o": Exactly the specified number of occurrences
 
-print(x)
-
-```
 
 ```
 
@@ -300,6 +311,9 @@ x = re.findall("he.{2}o", txt)
 print(x)
 
 ```
+
+
+"falls|stays": Either or
 
 ```
 
@@ -320,6 +334,12 @@ else:
 
 
 ```
+
+
+
+
+
+
 
 \A Returns a match if the specified characters are at the beginning of the string
 
