@@ -321,7 +321,7 @@ else:
 
 ```
 
-\A
+\A Returns a match if the specified characters are at the beginning of the string
 
 ```
 import re
@@ -341,7 +341,7 @@ else:
 
 ```
 
-\b
+\b Returns a match where the specified characters are at the beginning or at the end of a word
 
 ```
 import re
@@ -361,7 +361,7 @@ else:
 
 ```
 
-\B
+\B Returns a match where the specified characters are present, but NOT at the beginning
 
 ```
 import re
@@ -382,7 +382,7 @@ else:
 
 ```
 
-\d
+\d Returns a match where the string contains digits (numbers from 0-9)
 
 
 ```
@@ -403,7 +403,7 @@ else:
 
 
 ```
-\D
+\D Returns a match where the string DOES NOT contain digits 
 
 ```
 import re
@@ -423,7 +423,7 @@ else:
 
 ```
 
-\s
+\s Returns a match where the string contains a white space character
 
 ```
 
@@ -445,7 +445,7 @@ else:
 
 ```
 
-\S
+\S Returns a match where the string DOES NOT contain a white space character
 
 ```
 import re
@@ -466,7 +466,7 @@ else:
 
 ```
 
-\w
+\w Returns a match where the string contains any word characters
 
 ```
 
@@ -487,7 +487,7 @@ else:
 
 ```
 
-\W
+\W Returns a match where the string DOES NOT contain any word characters
 
 ```
 import re
@@ -507,7 +507,7 @@ else:
 
 ```
 
-\Z
+\Z Returns a match if the specified characters are at the end of the string
 
 ```
 
