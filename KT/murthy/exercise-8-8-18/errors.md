@@ -69,6 +69,142 @@ except IOError:
 
 ```
 
+Python Try-Except Block
+-------------------------
+
+```
+try:
+   # Code that might cause an exception
+   risky_code()
+except SomeException as e:
+   # Code that runs if an exception occurs
+   handle_exception(e)
+
+
+```
+
+Handling Multiple Exceptions
+--------------------------------
+
+```
+try:
+   # Code that might raise exceptions
+   risky_code()
+except FirstExceptionType:
+   # Handle the first type of exception
+   handle_first_exception()
+except SecondExceptionType:
+   # Handle the second type of exception
+   handle_second_exception()
+# Add more except blocks as needed for other exception types
+
+```
+
+```
+try:
+   dividend = int(input("Enter the dividend: "))
+   divisor = int(input("Enter the divisor: "))
+   result = dividend / divisor
+   print(f"Result of division: {result}")
+except ZeroDivisionError:
+   print("Error: Cannot divide by zero.")
+except ValueError:
+   print("Error: Invalid input. Please enter valid integers.")
+
+```
+
+
+Using Else Clause with Try-Except Block
+----------------------------------------
+
+```
+try:
+   # Code that might raise exceptions
+   risky_code()
+except SomeExceptionType:
+   # Handle the exception
+   handle_exception()
+else:
+   # Code that runs if no exceptions occurred
+   no_exceptions_code()
+
+```
+
+```
+try:
+   numerator = int(input("Enter the numerator: "))
+   denominator = int(input("Enter the denominator: "))
+   result = numerator / denominator
+except ValueError:
+   print("Error: Invalid input. Please enter valid integers.")
+except ZeroDivisionError:
+   print("Error: Cannot divide by zero.")
+else:
+   print(f"Result of division: {result}")
+
+```
+
+The Finally Clause
+--------------------
+
+```
+try:
+   file = open("example.txt", "r")
+   content = file.read()
+   print(content)
+except FileNotFoundError:
+   print("Error: The file was not found.")
+else:
+   print("File read operation successful.")
+finally:
+   if 'file' in locals():
+      file.close()
+   print("File operation is complete.")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
