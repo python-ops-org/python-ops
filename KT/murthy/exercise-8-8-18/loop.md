@@ -452,6 +452,20 @@ for x in fruits:
 ```
 
 ```
+
+f=['apple','orange','grapes']
+
+for x in f:
+    if x != 'pple':
+        break
+    print(x)
+
+
+```
+
+
+
+```
 adj = ["red", "big", "tasty"]
 fruits = ["apple", "banana", "cherry"]
 
