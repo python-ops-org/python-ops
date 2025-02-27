@@ -131,6 +131,33 @@ print(double(s))
 ```
 
 ```
+
+import subprocess
+import sys
+
+# Get the number of running Apache2 processes
+try:
+    result = subprocess.run("ps -ef | pgrep apache2 | wc -l", shell=True, capture_output=True, text=True)
+    p = int(result.stdout.strip())
+except ValueError:
+    print("critical")
+    sys.exit(2)
+
+# Check conditions
+if p == 0:
+    print("critical")
+    sys.exit(2)
+elif p <= 5:
+    print("warning")
+    sys.exit(1)
+else:
+    print(f"no of running apache: {p}")
+    sys.exit(0)
+
+```
+
+
+```
 double() {
     local s="$1"
     echo "$s" | grep -o . | sort | uniq -d
