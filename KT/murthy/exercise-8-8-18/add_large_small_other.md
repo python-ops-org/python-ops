@@ -66,8 +66,14 @@ echo "The smallest number is: $smallest_number"
 
 
 
+```
 
+n=[1,2,3]
+for i in n:
+    if i == min(n):
+        print(f'smallest number: {i}')
 
+```
 
 
 
