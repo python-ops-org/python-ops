@@ -1,4 +1,6 @@
 
+```
+
 def bubble_sort(arr):
     for _ in range(len(arr) - 1):
         for j in range(len(arr) - 1):
@@ -8,3 +10,5 @@ def bubble_sort(arr):
 
 arr = [64, 25, 12, 22, 11]
 print("Sorted array:", bubble_sort(arr))
+
+```
