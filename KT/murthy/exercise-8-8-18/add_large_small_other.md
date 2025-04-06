@@ -76,7 +76,16 @@ for i in n:
 ```
 
 
+```
 
+n = [4,5,6,9]
+sorted_n = sorted(n)
+print("smallest two number:")
+
+for i in range(2):
+   print(sorted_n[i])
+
+```
 
 
 
