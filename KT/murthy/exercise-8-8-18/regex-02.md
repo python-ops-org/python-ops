@@ -759,7 +759,16 @@ else:
 ```
 
 
+```
+import re 
 
+s = "kernoops:x:112:65534:Kernel Oops Tracking Daemon"
+
+x = re.split(r':', s)
+print(x[0])
+
+
+```
 
 
 
