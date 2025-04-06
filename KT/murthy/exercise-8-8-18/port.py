@@ -19,7 +19,7 @@ def check_port(port):
 
 # Example usage:
 p = 80  # Replace with the port number you want to check
-if check_port_open(p):
+if check_port(p):
     print(f"Port {p} is OPEN")
 else:
     print(f"Port {p} is CLOSED")
