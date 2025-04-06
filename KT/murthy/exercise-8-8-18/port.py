@@ -1,6 +1,6 @@
 import subprocess
 
-def check_port_open(port):
+def check_port(port):
     try:
         # Execute the netstat command to list listening TCP ports
         output = subprocess.check_output(['netstat', '-ntlp']).decode('utf-8')
@@ -18,8 +18,8 @@ def check_port_open(port):
         return False
 
 # Example usage:
-port_to_check = 80  # Replace with the port number you want to check
-if check_port_open(port_to_check):
-    print(f"Port {port_to_check} is OPEN")
+p = 80  # Replace with the port number you want to check
+if check_port_open(p):
+    print(f"Port {p} is OPEN")
 else:
-    print(f"Port {port_to_check} is CLOSED")
+    print(f"Port {p} is CLOSED")
