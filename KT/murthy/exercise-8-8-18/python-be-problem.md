@@ -92,7 +92,7 @@ INTERSECTION
 
 
 
-
+````
 import sys
 
 def detect_cycle(graph, start):
@@ -156,3 +156,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
