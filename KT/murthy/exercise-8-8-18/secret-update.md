@@ -1,45 +1,63 @@
 
 ```
-
 import boto3
-import string
+import json
 import random
-import os
+import string
 
 # Initialize Secrets Manager client
-secrets_client = boto3.client('secretsmanager')
+client = boto3.client('secretsmanager')
 
-# Secret Name from Lambda environment variable or hardcode it
-SECRET_NAME = os.environ.get('SECRET_NAME', 'your-secret-name')
+# Define the secret name and existing username
+secret_name = 'ag-key'
+existing_username = 'user123'  # Keep your existing username here
 
-def generate_random_secret(length=32):
+def generate_random_password(length=12):
+    """Generate a random password."""
     characters = string.ascii_letters + string.digits + string.punctuation
-    random_secret = ''.join(random.choice(characters) for i in range(length))
-    return random_secret
+    return ''.join(random.choice(characters) for _ in range(length))
 
-def lambda_handler(event, context):
+def rotate_secret(secret_name):
     try:
-        # Generate new random secret
-        new_secret_value = generate_random_secret()
+        # Retrieve the current secret value
+        response = client.get_secret_value(SecretId=secret_name)
+        
+        # Parse the current secret value
+        if 'SecretString' in response:
+            secret_string = response['SecretString']
+            secret = json.loads(secret_string)
+        else:
+            secret = json.loads(response['SecretBinary'])
 
-        # Update secret in Secrets Manager
-        response = secrets_client.update_secret(
-            SecretId=SECRET_NAME,
-            SecretString=new_secret_value
+        # Generate a new random password
+        new_password = generate_random_password()
+
+        # Update the secret with the existing username and new password
+        secret['username'] = existing_username
+        secret['password'] = new_password
+
+        # Update the secret in Secrets Manager
+        client.update_secret(
+            SecretId=secret_name,
+            SecretString=json.dumps(secret)
         )
 
-        print(f"Successfully updated secret: {SECRET_NAME}")
-        return {
-            'statusCode': 200,
-            'body': f"Secret {SECRET_NAME} updated successfully."
-        }
-
+        print(f"Successfully updated secret '{secret_name}' with new password.")
+        print(f"New Password: {new_password}")
+    
     except Exception as e:
         print(f"Error updating secret: {e}")
-        return {
-            'statusCode': 500,
-            'body': f"Failed to update secret: {str(e)}"
-        }
+
+def lambda_handler(event, context):
+    """
+    AWS Lambda function handler to rotate the secret in Secrets Manager.
+    """
+    rotate_secret(secret_name)
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(f"Secret '{secret_name}' updated successfully.")
+    }
 
 
 ```
