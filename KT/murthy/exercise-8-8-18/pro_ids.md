@@ -36,10 +36,13 @@ tail -n +2 "$INPUT_FILE" | while read -r icto_id; do
   # Join platform_types array into comma-separated string
   platform_type=$(IFS=','; echo "${platform_types[*]}")
 
-  ```
+  
 
   # Write to CSV
   echo "$icto_id,$platform_type,$sources" >> "$OUTPUT_FILE"
 done
 
 echo "Report generated in $OUTPUT_FILE"
+
+
+```
