@@ -131,6 +131,20 @@ print(double(s))
 ```
 
 ```
+from collections import Counter
+
+def unique_words(s):
+    return [word for word, count in Counter(s).items() if count == 1]
+
+s = ["linux", "windows", "unix", "mac", "unix"]
+print(unique_words(s))
+
+
+```
+
+
+
+```
 
 import subprocess
 import sys
