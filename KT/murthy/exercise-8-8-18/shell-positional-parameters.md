@@ -12,3 +12,10 @@
 | `$$`     | Stores the process ID of the current shell. |
 | `#!`     | Shebang: specifies the interpreter that should execute the script. |
 | `$-`     | Displays the current shell flags (e.g., `-x`, `-v`, etc.). |
+
+
+| Command         | Description |
+|----------------|-------------|
+| `set -e`        | Stops the script immediately if any command (including `declare`) exits with a non-zero status. |
+| `set -x`        | Enables debugging mode; prints each command (including `declare`) to the terminal as it is executed. |
+
