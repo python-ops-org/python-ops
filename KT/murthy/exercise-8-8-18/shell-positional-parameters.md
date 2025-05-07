@@ -19,3 +19,18 @@
 | `set -e`        | Stops the script immediately if any command (including `declare`) exits with a non-zero status. |
 | `set -x`        | Enables debugging mode; prints each command (including `declare`) to the terminal as it is executed. |
 
+
+
+what is the difference b/w it?
+
+p=cat id
+
+p=$(cat id)
+
+
+| **Aspect**        | **Backticks \`...\`**             | **Dollar-parens \$(...)**               |
+|-------------------|-----------------------------------|-----------------------------------------|
+| **Readability**   | Harder to read with nesting       | Easier to read and nest                 |
+| **Nesting support** | Limited / cumbersome             | Supports clean nesting of commands      |
+| **Portability**   | Supported in POSIX sh and Bash    | Supported in Bash and modern shells     |
+| **Preferred usage** | Old syntax                      | Recommended and modern style            |
