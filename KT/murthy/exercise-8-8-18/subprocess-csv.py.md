@@ -1,6 +1,5 @@
 
 ```
-
 import csv
 import subprocess
 
@@ -31,14 +30,19 @@ def run_ssh_command(server, command):
     """Execute SSH command and return output"""
     if not server['password']:
         return "Error: No password provided"
-    
+
     ssh_cmd = f"""sshpass -p '{server['password']}' ssh -o StrictHostKeyChecking=no {server['user']}@{server['host']} "{command}" """
     
     try:
         output = subprocess.run(ssh_cmd, shell=True, capture_output=True, text=True)
-        return output.stdout.strip() if output.returncode == 0 else f"Error: {output.stderr}"
+
+        if output.returncode == 0:
+            return output.stdout.strip()
+        else:
+            return "Error: " + output.stderr.strip()
+
     except Exception as e:
-        return f"Error: {str(e)}"
+        return "Error: " + str(e)
 
 # Print header
 print(f"{'Host':<15} {'Memory Usage (MB)':<20} {'Disk Usage':<15}")
@@ -50,6 +54,7 @@ for server in servers:
     disk = run_ssh_command(server, COMMANDS['disk'])
     
     print(f"{server['host']:<15} {memory:<20} {disk:<15}")
+
 
 
 ```
