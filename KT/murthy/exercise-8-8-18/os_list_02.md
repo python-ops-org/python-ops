@@ -6,7 +6,7 @@ import os
 import sys
 import glob
 
-REPO_URL = "http://git-repo:test.git"
+REPO_URL = "git@github.com:python-ops-org/python-ops.git"
 CLONE_DIR = "test_repo"
 NEW_BRANCH = "release/1.0"
 IMAGE_NAME = "test-app"
