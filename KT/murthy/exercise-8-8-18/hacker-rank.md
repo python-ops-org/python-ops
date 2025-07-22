@@ -1,7 +1,7 @@
 ```
 
-if __name__ == '__main__':
-    n = int(input().strip())
+
+    n = 5
     if n%2 == 3:
         print("Weird")
     else: 
