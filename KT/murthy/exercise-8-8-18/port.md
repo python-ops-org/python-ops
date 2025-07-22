@@ -31,17 +31,11 @@ else:
 ```
 import socket
 
-def check_port(port, host='127.0.0.1'):
-    try:
-        # Create a socket object
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            # Set timeout so it doesn't hang
-            sock.settimeout(1)
-            result = sock.connect_ex((host, port))
-            return result == 0  # 0 means port is open
-    except Exception as e:
-        print(f"Error checking port {port}: {e}")
-        return False
+def check_port(port):
+    s = socket.socket()
+    result = s.connect_ex(('127.0.0.1', port))
+    s.close()
+    return result == 0
 
 def main():
     port = 80  # Change this as needed
@@ -52,6 +46,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 ```
 
