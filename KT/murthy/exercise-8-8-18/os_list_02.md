@@ -1,49 +1,38 @@
-
-
-```
-
 import os
 import sys
 import glob
 
 REPO_URL = "git@github.com:python-ops-org/python-ops.git"
-CLONE_DIR = "test_repo"
+CLONE_DIR = "/tmp/01"
 NEW_BRANCH = "release/1.0"
-IMAGE_NAME = "test-app"
+IMAGE = "nginx:latest"
 
 def run_cmd(cmd):
-    print(f"{cmd}")
+    print(f"Running: {cmd}")
     code = os.system(cmd)
     if code != 0:
         print(f"Command failed: {cmd}")
-        sys.exit(1)
+    return code
 
 def main():
     if os.path.exists(CLONE_DIR):
         run_cmd(f"rm -rf {CLONE_DIR}")
     
-    run_cmd(f"git clone {REPO_URL} {CLONE_DIR}")
-    
+    if run_cmd(f"git clone {REPO_URL} {CLONE_DIR}") != 0:
+        sys.exit(1)
+
     os.chdir(CLONE_DIR)
-    run_cmd(f"git checkout -b {NEW_BRANCH}")
-    run_cmd("mvn clean package")
+    run_cmd("ls -l")
     os.chdir("..")
-
-    # Ensure artifacts directory exists
-    os.makedirs("artifacts", exist_ok=True)
-    run_cmd(f"cp {CLONE_DIR}/target/*.jar artifacts/")
-
-    print("Scanning Docker image with Trivy...")
-    scan_result = os.system(f"trivy image --exit-code 1 --quiet {IMAGE_NAME}:latest")
-
+    
+    print("Scanning Docker image...")
+    scan_result = run_cmd(f"trivy image --exit-code 1 --quiet {IMAGE}")
+    
     if scan_result != 0:
-        print("Trivy scan failed.")
+        print("Image scan failed.")
         sys.exit(1)
     else:
-        print("Scan clean. Pushing to ECR...")
-        print("Image pushed to ECR")
+        print("Image is clean. Pushing to ECR...")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-
-```
