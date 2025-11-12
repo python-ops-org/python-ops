@@ -49,7 +49,7 @@ def main():
     """)
 
     # Mocked sonar score logic
-    print("📊 Checking Sonar score...")
+    print("Checking Sonar score...")
     score = 100  # Replace with real API check
 
     if score >= 99:
@@ -57,7 +57,7 @@ def main():
 
         jar_files = glob.glob("artifacts/*.jar")
         if not jar_files:
-            print("❌ No JAR file found.")
+            print("No JAR file found.")
             sys.exit(1)
         jar_file = jar_files[0]
 
@@ -67,7 +67,7 @@ def main():
             {NEXUS_URL}{os.path.basename(jar_file)}
         """)
 
-        print("📦 Building Docker image...")
+        print("Building Docker image...")
         os.chdir(CLONE_DIR)
         run_cmd_os(f"docker build -t {IMAGE_NAME}:latest .")
         os.chdir("..")
@@ -75,7 +75,7 @@ def main():
         print("🔍 Scanning Docker image with Trivy...")
         scan_result = os.system(f"trivy image --exit-code 1 --quiet {IMAGE_NAME}:latest")
         if scan_result != 0:
-            print("❌ Trivy scan failed. Aborting push to ECR.")
+            print("Trivy scan failed. Aborting push to ECR.")
             sys.exit(1)
 
         print("✅ Scan clean. Pushing to ECR...")
@@ -85,7 +85,7 @@ def main():
 
         print("🚀 Image pushed to ECR successfully.")
     else:
-        print("❌ Sonar score too low. Skipping deployment.")
+        print("Sonar score too low. Skipping deployment.")
 
 if __name__ == "__main__":
     main()
