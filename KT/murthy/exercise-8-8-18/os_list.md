@@ -19,10 +19,10 @@ IMAGE_NAME = "test-app"
 ECR_REPO = "123456789012.dkr.ecr.ap-south-1.amazonaws.com/test-app"
 
 def run_cmd_os(cmd):
-    print(f"🛠️ {cmd}")
+    print(f"{cmd}")
     code = os.system(cmd)
     if code != 0:
-        print(f"❌ Command failed: {cmd}")
+        print(f"Command failed: {cmd}")
         sys.exit(1)
 
 def main():
