@@ -5,7 +5,7 @@ import os
 import sys
 
 REPO_URL = "git@github.com:infra-ops/kub-poc.git"
-CLONE_DIR = "/tmp/01"
+CLONE_DIR = "/tmp/01/kub-poc"
 WORKING_BRANCH = "release/1.0"
 TF_WORKING_DIRECTORY = os.path.join(CLONE_DIR, "cloud_k8s_platform/eks/infra_deployment/zero-click-eks-deployment/self-managed")
 
