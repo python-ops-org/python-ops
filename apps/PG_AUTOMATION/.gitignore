@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+.env.*
+
+# PostgreSQL Backups
+*.sql
+*.dump
+*.bak
+
+# Local Backup Directory
+backups/
+tmp/
+
+# Test / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Black Cache
+.cache/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Secrets
+secrets.yaml
+secrets.yml
+config.yaml
+config.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Docker
+docker-compose.override.yml
+
+# Amazon Linux
+*.swp
+*.swo
+
+# Generated Reports
+reports/
+output/
+
+# Runtime Files
+*.pid
+
+# Local Database Files
+*.db
+*.sqlite
+*.sqlite3
