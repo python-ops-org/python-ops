@@ -1,7 +1,16 @@
+import logging
 import uuid
+
 import psycopg2
 
 from database.db_config import DB_CONFIG
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+)
+
+logger = logging.getLogger(__name__)
 
 
 class InsertData:
@@ -10,16 +19,11 @@ class InsertData:
         self.config = DB_CONFIG
 
     def get_connection(self):
-        return psycopg2.connect(
-            host=self.config["host"],
-            database=self.config["database"],
-            user=self.config["user"],
-            password=self.config["password"],
-        )
+        return psycopg2.connect(**self.config)
 
     def insert_customer(self, cur):
 
-        self.customer_id = str(uuid.uuid4())
+        customer_id = str(uuid.uuid4())
 
         cur.execute(
             """
@@ -32,9 +36,10 @@ class InsertData:
                 status
             )
             VALUES (%s, %s, %s, %s, %s, %s)
+            ON CONFLICT (email) DO NOTHING
             """,
             (
-                self.customer_id,
+                customer_id,
                 "Sudipta Chakraborty",
                 "admin@retinahalo.com",
                 "9876543210",
@@ -43,9 +48,13 @@ class InsertData:
             ),
         )
 
-    def insert_site(self, cur):
+        logger.info("Customer inserted")
 
-        self.site_id = str(uuid.uuid4())
+        return customer_id
+
+    def insert_site(self, cur, customer_id):
+
+        site_id = str(uuid.uuid4())
 
         cur.execute(
             """
@@ -59,17 +68,21 @@ class InsertData:
             VALUES (%s, %s, %s, %s, %s)
             """,
             (
-                self.site_id,
-                self.customer_id,
+                site_id,
+                customer_id,
                 "Kolkata Office",
                 "Newtown, Kolkata",
                 "Asia/Kolkata",
             ),
         )
 
-    def insert_camera(self, cur):
+        logger.info("Site inserted")
 
-        self.camera_id = str(uuid.uuid4())
+        return site_id
+
+    def insert_camera(self, cur, site_id):
+
+        camera_id = str(uuid.uuid4())
 
         cur.execute(
             """
@@ -85,8 +98,8 @@ class InsertData:
             VALUES (%s, %s, %s, %s, %s, %s, %s)
             """,
             (
-                self.camera_id,
-                self.site_id,
+                camera_id,
+                site_id,
                 "Parking Camera",
                 "Hikvision DS-2CD",
                 "CAM001",
@@ -95,7 +108,11 @@ class InsertData:
             ),
         )
 
-    def insert_subscription(self, cur):
+        logger.info("Camera inserted")
+
+        return camera_id
+
+    def insert_subscription(self, cur, customer_id):
 
         subscription_id = str(uuid.uuid4())
 
@@ -120,46 +137,128 @@ class InsertData:
             """,
             (
                 subscription_id,
-                self.customer_id,
+                customer_id,
                 "Premium",
                 "ACTIVE",
             ),
         )
 
+        logger.info("Subscription inserted")
+
+        return subscription_id
+
+    def insert_storage_usage(self, cur, customer_id):
+
+        usage_id = str(uuid.uuid4())
+
+        cur.execute(
+            """
+            INSERT INTO storage_usage (
+                usage_id,
+                customer_id,
+                used_storage_gb,
+                usage_date
+            )
+            VALUES (%s, %s, %s, CURRENT_DATE)
+            """,
+            (
+                usage_id,
+                customer_id,
+                25.50,
+            ),
+        )
+
+        logger.info("Storage usage inserted")
+
+    def insert_camera_health(self, cur, camera_id):
+
+        health_id = str(uuid.uuid4())
+
+        cur.execute(
+            """
+            INSERT INTO camera_health (
+                health_id,
+                camera_id,
+                online,
+                fps,
+                bitrate,
+                storage_used_gb,
+                checked_at
+            )
+            VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                CURRENT_TIMESTAMP
+            )
+            """,
+            (
+                health_id,
+                camera_id,
+                True,
+                25.0,
+                2048.0,
+                12.5,
+            ),
+        )
+
+        logger.info("Camera health inserted")
+
     def execute(self):
 
-        conn = None
-
         try:
-            conn = self.get_connection()
-            cur = conn.cursor()
 
-            self.insert_customer(cur)
-            self.insert_site(cur)
-            self.insert_camera(cur)
-            self.insert_subscription(cur)
+            logger.info("Connecting to PostgreSQL")
 
-            conn.commit()
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
 
-            print("Sample RetinaHalo data inserted successfully")
+                    customer_id = self.insert_customer(cur)
+
+                    site_id = self.insert_site(
+                        cur,
+                        customer_id,
+                    )
+
+                    camera_id = self.insert_camera(
+                        cur,
+                        site_id,
+                    )
+
+                    self.insert_subscription(
+                        cur,
+                        customer_id,
+                    )
+
+                    self.insert_storage_usage(
+                        cur,
+                        customer_id,
+                    )
+
+                    self.insert_camera_health(
+                        cur,
+                        camera_id,
+                    )
+
+                conn.commit()
+
+            logger.info(
+                "Sample RetinaHalo data inserted successfully"
+            )
 
         except Exception as error:
-            print(f"Insert failed: {error}")
-
-            if conn:
-                conn.rollback()
-
+            logger.exception(
+                "Failed to insert sample data: %s",
+                error,
+            )
             raise
-
-        finally:
-            if conn:
-                cur.close()
-                conn.close()
 
 
 def insert_data():
-    inserter = InsertData()
-    inserter.execute()
+    InsertData().execute()
 
 
 if __name__ == "__main__":
