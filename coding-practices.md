@@ -1,11 +1,6 @@
 
 # Enterprise Python Development Standards & Best Practices
 
-> **Objective**
->
-> This document defines the engineering standards and best practices for developing Python applications across the organization. Following these guidelines ensures consistency, maintainability, security, scalability, and high-quality software delivery.
-
----
 
 # 1. Development Environment
 
@@ -16,7 +11,6 @@
 - Python
 - Pylance
 - Black Formatter
-- Ruff
 - GitLens
 - Docker
 - Kubernetes
@@ -39,6 +33,8 @@ Use **PASFolds** to generate a standard project structure.
 - Consistent project layout
 
 ### Standard Project Structure
+
+- [CREATE-PROJECT](https://github.com/python-ops-org/python-ops/blob/master/create_python_project.sh)
 
 ```text
 grafana-backup-api/
@@ -91,29 +87,13 @@ grafana-backup-api/
 
 ```bash
 python3 -m venv .venv
-```
 
-### Activate (Linux/macOS)
-
-```bash
 source .venv/bin/activate
-```
 
-### Activate (Windows)
-
-```powershell
 .venv\Scripts\activate
-```
 
-### Install Packages
-
-```bash
 pip install -r requirements.txt
-```
 
-### Freeze Dependencies
-
-```bash
 pip freeze > requirements.txt
 ```
 
@@ -122,7 +102,6 @@ pip freeze > requirements.txt
 ## 1.4 Manage Dependencies
 
 - Maintain `requirements.txt`
-- Maintain `pyproject.toml`
 - Pin package versions
 - Remove unused packages regularly
 
@@ -135,7 +114,6 @@ pip freeze > requirements.txt
 Recommended tools:
 
 - Black
-- Ruff
 - Flake8
 
 ---
@@ -201,11 +179,6 @@ Format the entire project:
 
 ```bash
 black .
-```
-
-Format a single file:
-
-```bash
 black app.py
 ```
 
@@ -213,23 +186,11 @@ VS Code shortcut:
 
 ```
 Shift + Alt + F
-```
 
----
-
-## 3.2 Format JSON
-
-VS Code:
-
-```
 Shift + Alt + F
-```
 
-or
-
-```
 Ctrl + Shift + P
-→ Format Document
+
 ```
 
 ---
@@ -238,11 +199,6 @@ Ctrl + Shift + P
 
 ```bash
 yamllint values.yaml
-```
-
-VS Code:
-
-```
 Shift + Alt + F
 ```
 
@@ -254,17 +210,9 @@ Lint:
 
 ```bash
 helm lint charts/my-chart
-```
 
-Render templates:
-
-```bash
 helm template charts/my-chart
-```
 
-Validate rendered YAML:
-
-```bash
 helm template charts/my-chart | yamllint -
 ```
 
@@ -282,7 +230,7 @@ Recommended tools:
 ## 3.6 Static Code Analysis
 
 ```bash
-ruff check .
+
 flake8 .
 mypy .
 bandit -r .
@@ -303,23 +251,11 @@ Run all tests:
 
 ```bash
 pytest
-```
 
-Run a single file:
-
-```bash
 pytest tests/test_app.py
-```
 
-Verbose output:
-
-```bash
 pytest -v
-```
 
-Coverage:
-
-```bash
 pytest --cov=app tests/
 ```
 
@@ -346,7 +282,7 @@ Use:
 import logging
 ```
 
-❌ Never use:
+Never use:
 
 ```python
 print()
@@ -378,11 +314,7 @@ Use:
 
 ```bash
 pip-audit
-```
 
-or
-
-```bash
 safety check
 ```
 
@@ -392,19 +324,7 @@ safety check
 
 ## 7.1 Use Lean Base Images
 
-✅ Preferred
 
-```dockerfile
-FROM python:3.12-slim
-```
-
-❌ Avoid
-
-```dockerfile
-FROM python:latest
-```
-
----
 
 ## 7.2 Use Multi-Stage Docker Builds
 
@@ -416,25 +336,7 @@ Benefits:
 
 Example:
 
-```dockerfile
-FROM python:3.12-slim AS builder
 
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-FROM python:3.12-slim
-
-WORKDIR /app
-
-COPY --from=builder /app /app
-
-CMD ["python", "app.py"]
-```
 
 ---
 
@@ -464,11 +366,6 @@ USER app
 
 ```bash
 trivy image my-app:latest
-```
-
-or
-
-```bash
 docker scout quickview my-app
 ```
 
@@ -561,8 +458,6 @@ Generate:
 ```bash
 kubectl apply --dry-run=client -f deployment.yaml
 ```
-
----
 
 ## 10.2 Validate Helm Charts Before Deployment
 
