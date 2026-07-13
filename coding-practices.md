@@ -16,8 +16,7 @@
 - Kubernetes
 - YAML
 - GitHub Copilot
-- Amazon Q Developer
-- Error Lens
+
 
 ---
 
@@ -32,7 +31,7 @@ Use **PASFolds** to generate a standard project structure.
 - Easier maintenance
 - Consistent project layout
 
-### Standard Project Structure
+### Standard Moduler Project Structure
 
 - [CREATE-PROJECT](https://github.com/python-ops-org/python-ops/blob/master/create_python_project.sh)
 
@@ -118,18 +117,7 @@ Recommended tools:
 
 ---
 
-## 2.2 Follow a Modular Architecture
 
-Separate application code into:
-
-- `api`
-- `services`
-- `repositories`
-- `models`
-- `config`
-- `utils`
-- `common`
-- `tests`
 
 ---
 
@@ -334,7 +322,7 @@ Benefits:
 - Faster deployment
 - Reduced attack surface
 
-Example:
+- [multi-stage-dockerfile](https://github.com/nik786/kube-learn/blob/master/KUBERNETES/multi-stage-nodejs-dockerfile)
 
 
 
@@ -359,6 +347,15 @@ USER app
 - Remove temporary files
 - Copy only required files
 - Minimize image layers
+- DOCKER_BUILDKIT=1 docker build
+   DOCKER_BUILDKIT=1 docker build -t grafana-backup .
+- Use Dive
+- --squash
+   docker build --squash -t grafana-backup .
+- docker builder prune -a
+- docker image prune -a
+- docker system prune -a --volumes
+ 
 
 ---
 
@@ -366,7 +363,7 @@ USER app
 
 ```bash
 trivy image my-app:latest
-docker scout quickview my-app
+
 ```
 
 ---
@@ -413,9 +410,7 @@ Review for:
 Recommended tools:
 
 - GitHub Copilot
-- Amazon Q Developer
-- Cursor
-- ChatGPT
+
 
 ---
 
@@ -424,8 +419,7 @@ Recommended tools:
 Recommended tools:
 
 - Qodo
-- Amazon Q
-- Cursor AI
+- CodeQL
 - GitHub Copilot Chat
 
 Use AI to identify:
