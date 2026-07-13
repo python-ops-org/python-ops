@@ -1,523 +1,318 @@
-
 # Enterprise Python Development Standards & Best Practices
 
+> **Version:** 2.0  
+> **Audience:** Python Developers, DevOps Engineers, SREs, Platform Engineers
+
+## Table of Contents
+
+1. Development Environment
+2. Project Structure
+3. Dependency Management
+4. Coding Standards
+5. Code Quality
+6. Testing
+7. Logging & Error Handling
+8. Security
+9. Docker Best Practices
+10. Kubernetes Best Practices
+11. Git & Pull Requests
+12. CI/CD
+13. AI-Assisted Development
+14. Quick Reference
+
+---
 
 # 1. Development Environment
 
-## 1.1 Use Visual Studio Code as the Standard IDE
+## Recommended IDE
+
+- Visual Studio Code
 
 ### Recommended Extensions
 
-- Python
-- Pylance
-- Black Formatter
-- GitLens
-- Docker
-- Kubernetes
-- YAML
-- GitHub Copilot
+| Extension | Purpose |
+|-----------|---------|
+| Python | Python support |
+| Pylance | IntelliSense |
+| Ruff | Linting |
+| Black Formatter | Formatting |
+| GitLens | Git insights |
+| Docker | Docker integration |
+| Kubernetes | Kubernetes manifests |
+| YAML | YAML editing |
+| Error Lens | Inline diagnostics |
+| GitHub Copilot | AI coding |
+| AWS Toolkit | AWS integration |
+| Terraform | IaC support |
+| SonarLint | Static analysis |
 
-
----
-
-## 1.2 Create Projects Using PASFolds
-
-Use **PASFolds** to generate a standard project structure.
-
-### Benefits
-
-- Standardized directory structure
-- Faster onboarding
-- Easier maintenance
-- Consistent project layout
-
-### Standard Moduler Project Structure
-
-- [CREATE-PROJECT](https://github.com/python-ops-org/python-ops/blob/master/create_python_project.sh)
-
-```text
-grafana-backup-api/
-├── src/
-│   ├── __init__.py
-│   ├── run.py
-│   ├── config.py
-│   ├── service/
-│   │   └── __init__.py
-│   ├── utils/
-│   │   └── __init__.py
-│   └── common/
-│       └── __init__.py
-│
-├── tests/
-│   └── .gitkeep
-│
-├── templates/
-│   ├── prod/
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   ├── configmap.yaml
-│   │   └── pvc.yaml
-│   └── syst/
-│       ├── deployment.yaml
-│       ├── service.yaml
-│       ├── configmap.yaml
-│       └── pvc.yaml
-│
-├── scripts/
-│   └── test.sh
-│
-├── docs/
-│   └── architecture.md
-│
-├── Dockerfile
-├── .dockerignore
-├── .gitignore
-├── .env.example
-├── pyproject.toml
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 1.3 Create a Virtual Environment
-
-### Create
+## Virtual Environment
 
 ```bash
 python3 -m venv .venv
-
 source .venv/bin/activate
-
-.venv\Scripts\activate
-
 pip install -r requirements.txt
-
 pip freeze > requirements.txt
 ```
 
 ---
 
-## 1.4 Manage Dependencies
+# 2. Standard Project Structure
 
-- Maintain `requirements.txt`
-- Pin package versions
-- Remove unused packages regularly
-
----
-
-# 2. Coding Standards
-
-## 2.1 Follow PEP 8
-
-Recommended tools:
-
-- Black
-- Flake8
-
----
-
-
-
----
-
-## 2.3 Use Meaningful Naming
-
-Use descriptive names for:
-
-- Classes
-- Functions
-- Variables
-- Packages
-- Files
+```text
+project/
+├── src/
+├── tests/
+├── docs/
+├── scripts/
+├── templates/
+├── configs/
+├── .github/
+├── .vscode/
+├── Dockerfile
+├── .dockerignore
+├── .gitignore
+├── pyproject.toml
+├── Makefile
+├── README.md
+└── requirements.txt
+```
 
 ---
 
-## 2.4 Use Type Hints
+# 3. Dependency Management
+
+| Recommendation | Best Practice |
+|---------------|---------------|
+| Dependency File | requirements.txt |
+| Tool Configuration | pyproject.toml |
+| Lock Versions | Yes |
+| Remove Unused Packages | Regularly |
+
+---
+
+# 4. Coding Standards
+
+- Follow **PEP 8**
+- Use **meaningful names**
+- Add **type hints**
+- Write **docstrings**
+- Prefer **f-strings**
+- Keep functions small and focused
 
 Example:
 
 ```python
 def create_user(name: str) -> bool:
-    ...
+    return True
 ```
 
-Recommended tool:
-
-- mypy
-
 ---
 
-## 2.5 Write Documentation
+# 5. Code Quality
 
-Maintain:
+| Tool | Purpose |
+|------|---------|
+| Ruff | Linting + import sorting |
+| Black | Formatting |
+| mypy | Type checking |
+| Bandit | Security scanning |
+| pip-audit | Dependency scanning |
 
-- README.md
-- Docstrings
-- Architecture diagrams
-- Confluence documentation
-
----
-
-# 3. Code Quality
-
-## 3.1 Format Python Code
-
-Format the entire project:
+Commands:
 
 ```bash
+ruff check .
 black .
-black app.py
-```
-
-VS Code shortcut:
-
-```
-Shift + Alt + F
-
-Shift + Alt + F
-
-Ctrl + Shift + P
-
-```
-
----
-
-## 3.3 Format YAML
-
-```bash
-yamllint values.yaml
-Shift + Alt + F
-```
-
----
-
-## 3.4 Validate Helm Charts
-
-Lint:
-
-```bash
-helm lint charts/my-chart
-
-helm template charts/my-chart
-
-helm template charts/my-chart | yamllint -
-```
-
----
-
-## 3.5 Sort Imports
-
-Recommended tools:
-
-- Ruff
-- isort
-
----
-
-## 3.6 Static Code Analysis
-
-```bash
-
-flake8 .
 mypy .
 bandit -r .
 pip-audit
 ```
 
----
-
-# 4. Testing
-
-## 4.1 Write Unit Tests
-
-Recommended framework:
-
-- pytest
-
-Run all tests:
+### Pre-commit
 
 ```bash
-pytest
-
-pytest tests/test_app.py
-
-pytest -v
-
-pytest --cov=app tests/
+pip install pre-commit
+pre-commit install
 ```
 
 ---
 
-## 4.2 Maintain High Test Coverage
+# 6. Testing
 
-Cover:
+Use **pytest**.
 
-- Business logic
-- Negative scenarios
-- Edge cases
-- Exception handling
+```bash
+pytest
+pytest -v
+pytest --cov=src tests/
+```
+
+Target **80%+** code coverage.
 
 ---
 
-# 5. Logging & Error Handling
-
-## 5.1 Implement Logging
+# 7. Logging & Error Handling
 
 Use:
 
 ```python
 import logging
+logger = logging.getLogger(__name__)
 ```
 
-Never use:
-
-```python
-print()
-```
+Never use `print()` for production logging.
 
 ---
 
-## 5.2 Handle Exceptions Properly
+# 8. Security
 
-- Catch expected exceptions
-- Log errors
-- Never use `except:` without specifying an exception
+- Never hardcode secrets
+- Use Kubernetes Secrets
+- Use AWS Secrets Manager
+- Scan dependencies
+- Scan container images
 
----
-
-# 6. Security
-
-## 6.1 Never Hardcode Secrets
-
-Use:
-
-- AWS Secrets Manager
-- Kubernetes Secrets
-- Environment Variables
-
----
-
-## 6.2 Scan Dependencies
+Commands:
 
 ```bash
 pip-audit
-
-safety check
+bandit -r .
+trivy image my-app:latest
 ```
 
 ---
 
-# 7. Docker Best Practices
+# 9. Docker Best Practices
 
-## 7.1 Use Lean Base Images
+| Best Practice | Description |
+|--------------|-------------|
+| Slim Images | `python:3.12-slim` |
+| Multi-stage Builds | Reduce image size |
+| Non-root User | Improve security |
+| `.dockerignore` | Reduce build context |
+| BuildKit | Faster builds |
+| Docker Scout | Recommendations |
+| Dive | Layer analysis |
 
-
-
-## 7.2 Use Multi-Stage Docker Builds
-
-Benefits:
-
-- Smaller image size
-- Faster deployment
-- Reduced attack surface
-
-- [multi-stage-dockerfile](https://github.com/nik786/kube-learn/blob/master/KUBERNETES/multi-stage-nodejs-dockerfile)
-
-
-
----
-
-## 7.3 Run Containers as Non-Root
-
-```dockerfile
-RUN addgroup --system app
-
-RUN adduser --system --ingroup app app
-
-USER app
-```
-
----
-
-## 7.4 Optimize Docker Images
-
-- Use `.dockerignore`
-- Use `--no-cache-dir`
-- Remove temporary files
-- Copy only required files
-- Minimize image layers
-- DOCKER_BUILDKIT=1 docker build
-   DOCKER_BUILDKIT=1 docker build -t grafana-backup .
-- Use Dive
-- --squash
-   docker build --squash -t grafana-backup .
-- docker builder prune -a
-- docker image prune -a
-- docker system prune -a --volumes
- 
-
----
-
-## 7.5 Scan Docker Images
+Example:
 
 ```bash
-trivy image my-app:latest
-
+DOCKER_BUILDKIT=1 docker build -t my-app .
 ```
 
----
+Cleanup:
 
-# 8. Git & Pull Requests
-
-## 8.1 Follow Git Best Practices
-
-- Use feature branches
-- Make small commits
-- Write meaningful commit messages
-- Protect the `main` branch
-
----
-
-## 8.2 Follow Pull Request Best Practices
-
-Every Pull Request should:
-
-- Be small
-- Contain one feature
-- Link the Jira ticket
-- Include testing evidence
-- Be reviewed before merging
-
----
-
-## 8.3 Conduct Peer Reviews
-
-Review for:
-
-- Code quality
-- Security
-- Performance
-- Testing
-- Documentation
-
----
-
-# 9. AI-Assisted Development
-
-## 9.1 Use AI Coding Assistants
-
-Recommended tools:
-
-- GitHub Copilot
-
-
----
-
-## 9.2 Use AI for Pull Request Reviews
-
-Recommended tools:
-
-- Qodo
-- CodeQL
-- GitHub Copilot Chat
-
-Use AI to identify:
-
-- Bugs
-- Missing tests
-- Code smells
-- Security vulnerabilities
-- Performance issues
-
----
-
-## 9.3 Use AI for Documentation
-
-Generate:
-
-- README files
-- API documentation
-- Release notes
-- Unit test templates
-
-> **Always verify AI-generated content before committing it to the repository.**
+```bash
+docker builder prune -a
+docker image prune -a
+docker system prune -a --volumes
+```
 
 ---
 
 # 10. Kubernetes Best Practices
 
-## 10.1 Validate Kubernetes Manifests
+- Define CPU/Memory requests and limits
+- Configure liveness/readiness probes
+- Use ConfigMaps and Secrets
+- Validate manifests
 
 ```bash
 kubectl apply --dry-run=client -f deployment.yaml
-```
-
-## 10.2 Validate Helm Charts Before Deployment
-
-```bash
 helm lint charts/my-chart
-
-helm template charts/my-chart | yamllint -
 ```
 
 ---
 
-## 10.3 Define Resource Requests and Limits
+# 11. Git & Pull Requests
 
-Always specify CPU and memory requests and limits.
+| Practice | Recommendation |
+|----------|----------------|
+| Branch Strategy | Feature branches |
+| Commits | Small & meaningful |
+| PR Size | One feature per PR |
+| Reviews | Mandatory |
 
-```yaml
-resources:
-  requests:
-    cpu: "200m"
-    memory: "256Mi"
-  limits:
-    cpu: "500m"
-    memory: "512Mi"
+---
+
+# 12. CI/CD Pipeline
+
+```text
+Developer
+    │
+    ▼
+Pre-commit
+    ▼
+Ruff
+    ▼
+Black
+    ▼
+mypy
+    ▼
+pytest
+    ▼
+Bandit
+    ▼
+pip-audit
+    ▼
+Docker Build
+    ▼
+Trivy
+    ▼
+Helm Lint
+    ▼
+Deploy
 ```
 
 ---
 
-# Quick Reference Commands
+# 13. AI-Assisted Development
+
+Recommended:
+
+- GitHub Copilot
+- Amazon Q
+- Qodo
+- Cursor
+
+Use AI for:
+
+- Unit tests
+- Documentation
+- Code review
+- Refactoring
+
+Always review AI-generated code before committing.
+
+---
+
+# 14. Quick Reference
 
 | Activity | Command |
-|-----------|---------|
-| Create Virtual Environment | `python3 -m venv .venv` |
-| Activate Virtual Environment | `source .venv/bin/activate` |
-| Install Packages | `pip install -r requirements.txt` |
-| Freeze Packages | `pip freeze > requirements.txt` |
-| Format Python | `black .` |
-| Ruff Check | `ruff check .` |
-| Flake8 | `flake8 .` |
+|----------|---------|
+| Create venv | `python3 -m venv .venv` |
+| Activate | `source .venv/bin/activate` |
+| Install | `pip install -r requirements.txt` |
+| Format | `black .` |
+| Lint | `ruff check .` |
 | Type Check | `mypy .` |
-| Security Scan | `bandit -r .` |
-| Dependency Scan | `pip-audit` |
-| Validate YAML | `yamllint values.yaml` |
-| Helm Lint | `helm lint charts/my-chart` |
-| Validate Helm | `helm template charts/my-chart \| yamllint -` |
-| Run Tests | `pytest` |
-| Test Coverage | `pytest --cov=app tests/` |
-| Build Docker Image | `docker build -t my-app .` |
-| Run Docker | `docker run -p 8000:8000 my-app` |
-| Scan Docker Image | `trivy image my-app:latest` |
-| Kubernetes Dry Run | `kubectl apply --dry-run=client -f deployment.yaml` |
+| Test | `pytest` |
+| Docker Build | `docker build -t my-app .` |
+| Docker Scan | `trivy image my-app` |
+| Helm Lint | `helm lint chart/` |
+| K8s Dry Run | `kubectl apply --dry-run=client -f deployment.yaml` |
 
 ---
 
 # Overall Assessment
 
-This document provides a comprehensive set of enterprise Python development standards covering:
+Following these standards promotes:
 
-- Development environment
-- Coding standards
-- Code quality
-- Testing
-- Logging
+- Consistency
+- Maintainability
 - Security
-- Docker
-- Git workflows
-- AI-assisted development
-- Kubernetes best practices
-
-Following these standards promotes consistency, maintainability, security, and scalable software development across engineering teams.
+- Performance
+- Scalability
+- Production readiness
+- Enterprise-grade engineering practices
