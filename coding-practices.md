@@ -36,13 +36,10 @@
 | Pylance | IntelliSense |
 | Ruff | Linting |
 | Black Formatter | Formatting |
-| GitLens | Git insights |
 | Docker | Docker integration |
 | Kubernetes | Kubernetes manifests |
 | YAML | YAML editing |
-| Error Lens | Inline diagnostics |
 | GitHub Copilot | AI coding |
-| AWS Toolkit | AWS integration |
 | Terraform | IaC support |
 | SonarLint | Static analysis |
 
