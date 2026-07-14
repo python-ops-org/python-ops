@@ -1,421 +1,383 @@
 # Enterprise Python Development Standards & Best Practices
 
-> **Version:** 2.1  
-> **Audience:** Python Developers, DevOps Engineers, SREs, and Platform Engineers
+> **Version:** 3.0\
+> **Audience:** Python Developers, DevOps Engineers, SREs, and Platform
+> Engineers
 
----
+------------------------------------------------------------------------
 
 # Table of Contents
 
-1. Development Environment
-2. Project Structure
-3. Dependency Management
-4. Coding Standards
-5. Code Quality
-6. Testing
-7. Logging & Error Handling
-8. Security
-9. Docker Best Practices
+1.  Development Environment
+2.  Project Structure
+3.  Dependency Management
+4.  Coding Standards
+5.  Code Quality
+6.  Testing
+7.  Logging & Observability
+8.  Security
+9.  Docker Best Practices
 10. Kubernetes Best Practices
 11. Git & Pull Request Best Practices
 12. CI/CD Pipeline
 13. AI-Assisted Development
-14. YAML & JSON Utilities
-15. Quick Reference
+14. Documentation Standards
+15. YAML & JSON Utilities
+16. Quick Reference
 
----
+------------------------------------------------------------------------
 
 # 1. Development Environment
 
-## Recommended IDE
+## Standards
 
-- Visual Studio Code
+-   Standardize on **Python 3.12+**
+-   Use **Visual Studio Code**
+-   Configure projects using **pyproject.toml**
+-   Use isolated virtual environments
 
-### Recommended Extensions
+## Recommended Extensions
 
-| Extension | Purpose |
-|-----------|---------|
-| Python | Python language support |
-| Pylance | IntelliSense and type checking |
-| Flake8 | PEP 8 linting |
-| Black Formatter | Code formatting |
-| GitLens | Git history and blame |
-| Docker | Docker integration |
-| Kubernetes | Kubernetes manifest support |
-| YAML | YAML editing |
-| Error Lens | Display errors inline |
-| GitHub Copilot | AI coding assistant |
-| AWS Toolkit | AWS integration |
-| Terraform | Infrastructure as Code |
-| SonarLint | Static code analysis |
+  Extension         Purpose
+  ----------------- -------------------------------
+  Python            Python support
+  Pylance           IntelliSense & Type Checking
+  Ruff              Fast linting & import sorting
+  Black Formatter   Code formatting
+  GitLens           Git history
+  Docker            Docker integration
+  Kubernetes        Manifest support
+  YAML              YAML editing
+  SonarLint         Static analysis
+  AWS Toolkit       AWS integration
+  Terraform         IaC support
 
----
+------------------------------------------------------------------------
 
-## Create a Virtual Environment
+# 2. Project Structure
 
-```bash
-python3 -m venv .venv
-
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
-pip freeze > requirements.txt
-```
-
----
-
-# 2. Standard Project Structure
-
-```text
+``` text
 project/
 ├── src/
 ├── tests/
 ├── docs/
 ├── scripts/
-├── templates/
 ├── configs/
+├── templates/
 ├── .github/
-├── .vscode/
 ├── Dockerfile
-├── .dockerignore
-├── .gitignore
 ├── pyproject.toml
 ├── Makefile
 ├── README.md
 └── requirements.txt
 ```
 
----
+------------------------------------------------------------------------
 
 # 3. Dependency Management
 
-| Recommendation | Best Practice |
-|---------------|---------------|
-| Dependency File | requirements.txt |
-| Project Configuration | pyproject.toml |
-| Pin Package Versions | Yes |
-| Remove Unused Packages | Regularly |
+-   Pin dependency versions
+-   Maintain `requirements.txt`
+-   Configure tools in `pyproject.toml`
+-   Consider **uv** or **pip-tools**
+-   Review dependencies regularly
 
----
+------------------------------------------------------------------------
 
 # 4. Coding Standards
 
-Follow these best practices:
+-   Follow PEP 8
+-   Use type hints
+-   Prefer f-strings
+-   Write docstrings
+-   Keep functions small
+-   Avoid duplicate code
 
-- Follow **PEP 8**
-- Use meaningful variable and function names
-- Add type hints
-- Write docstrings
-- Prefer f-strings
-- Keep functions small and focused
-
-Example:
-
-```python
-def create_user(name: str) -> bool:
-    return True
-```
-
----
+------------------------------------------------------------------------
 
 # 5. Code Quality
 
-## Recommended Tools
+Recommended tools:
 
-| Tool | Purpose |
-|------|---------|
-| Flake8 | PEP 8 linting and code quality |
-| Black | Code formatting |
-| mypy | Static type checking |
-| Bandit | Security scanning |
-| pip-audit | Dependency vulnerability scanning |
+-   Ruff
+-   Black
+-   mypy
+-   Bandit
+-   pip-audit
+-   pre-commit
 
-### Run Code Quality Checks
-
-```bash
-flake8 .
-
+``` bash
+ruff check .
 black .
-
 mypy .
-
 bandit -r .
-
 pip-audit
 ```
 
----
-
-## Configure Flake8
-
-Create a `.flake8` file:
-
-```ini
-[flake8]
-max-line-length = 100
-ignore = E203,W503
-exclude =
-    .git,
-    __pycache__,
-    .venv,
-    build,
-    dist
-```
-
----
-
-## Pre-commit Hooks
-
-```bash
-pip install pre-commit
-
-pre-commit install
-```
-
----
+------------------------------------------------------------------------
 
 # 6. Testing
 
-Use **pytest** for unit testing.
+-   pytest
+-   Fixtures
+-   Parameterized tests
+-   unittest.mock / pytest-mock
+-   Integration tests
+-   End-to-End tests
+-   ≥80% code coverage
 
-```bash
-pytest
+------------------------------------------------------------------------
 
-pytest -v
+# 7. Logging & Observability
 
-pytest --cov=src tests/
-```
+-   Structured JSON logging
+-   Correlation IDs
+-   Request IDs
+-   Appropriate log levels
+-   Never log secrets
+-   OpenTelemetry integration
 
-Target **80% or higher** code coverage.
-
----
-
-# 7. Logging & Error Handling
-
-Use the Python logging module.
-
-```python
-import logging
-
-logger = logging.getLogger(__name__)
-```
-
-Best Practices:
-
-- Never use `print()` in production code.
-- Log meaningful messages.
-- Handle expected exceptions gracefully.
-
----
+------------------------------------------------------------------------
 
 # 8. Security
 
-Best Practices
+-   AWS Secrets Manager
+-   Kubernetes Secrets
+-   Least-Privilege IAM
+-   RBAC
+-   Bandit
+-   pip-audit
+-   Trivy
+-   SBOM generation
+-   Cosign image signing
+-   Gitleaks secret scanning
 
-- Never hardcode secrets.
-- Use AWS Secrets Manager.
-- Use Kubernetes Secrets.
-- Scan dependencies regularly.
-- Scan Docker images before deployment.
-
-Commands:
-
-```bash
-bandit -r .
-
-pip-audit
-
-trivy image my-app:latest
-```
-
----
+------------------------------------------------------------------------
 
 # 9. Docker Best Practices
 
-| Best Practice | Description |
-|--------------|-------------|
-| Use `python:3.12-slim` | Reduce image size |
-| Multi-stage Build | Smaller production images |
-| Run as Non-root User | Improve security |
-| `.dockerignore` | Reduce build context |
-| BuildKit | Faster builds |
-| Docker Scout | Image recommendations |
-| Dive | Analyze image layers |
+-   Multi-stage builds
+-   Pin image versions
+-   Run as non-root
+-   Use `.dockerignore`
+-   Enable BuildKit
+-   Add HEALTHCHECK
+-   Docker Scout
+-   Dive
 
-Build Example
-
-```bash
-DOCKER_BUILDKIT=1 docker build -t my-app .
-```
-
-Cleanup Commands
-
-```bash
-docker builder prune -a
-
-docker image prune -a
-
-docker system prune -a --volumes
-```
-
----
+------------------------------------------------------------------------
 
 # 10. Kubernetes Best Practices
 
-Best Practices
+-   CPU & memory requests/limits
+-   Readiness & liveness probes
+-   ConfigMaps & Secrets
+-   RBAC
+-   NetworkPolicy
+-   SecurityContext
+-   PodDisruptionBudget
+-   HPA/VPA
+-   ResourceQuota
+-   LimitRange
+-   `helm lint`
+-   `kubectl apply --dry-run=client`
 
-- Define CPU and memory requests & limits.
-- Configure readiness and liveness probes.
-- Store configuration in ConfigMaps.
-- Store secrets in Kubernetes Secrets.
-- Validate manifests before deployment.
-
-Commands
-
-```bash
-kubectl apply --dry-run=client -f deployment.yaml
-
-helm lint charts/my-chart
-```
-
----
+------------------------------------------------------------------------
 
 # 11. Git & Pull Request Best Practices
 
-| Practice | Recommendation |
-|----------|----------------|
-| Branch Strategy | Use feature branches |
-| Commit Messages | Keep them meaningful |
-| Pull Requests | One feature per PR |
-| Code Reviews | Mandatory before merge |
+## Branch Strategy
 
----
+Use feature branches.
+
+  Branch    Example
+  --------- ------------------------------
+  Feature   `feature/OBS-245-backup-api`
+  Bugfix    `bugfix/OBS-301-auth-fix`
+  Hotfix    `hotfix/OBS-410-prod-fix`
+  Release   `release/v3.0.0`
+
+### Rules
+
+-   Never push directly to `main`.
+-   One feature or bug per branch.
+-   Link every branch to a Jira ticket.
+-   Delete merged feature branches.
+
+## Commit Messages
+
+Format:
+
+``` text
+<JIRA-ID>: <Description>
+```
+
+Example:
+
+``` text
+OBS-245: Add Grafana backup scheduler
+```
+
+## Pull Requests
+
+-   One feature per PR
+-   Mandatory Code Review (CR)
+-   Four-Eye Principle (minimum one independent approval)
+-   Link Jira ticket
+-   Include testing evidence
+-   Update documentation when required
+
+## GitHub CodeQL
+
+Enable CodeQL on every Pull Request.
+
+Detects:
+
+-   SQL Injection
+-   Command Injection
+-   Credential leaks
+-   Unsafe API usage
+-   Security vulnerabilities
+
+Treat High and Critical findings as merge blockers.
+
+## Branch Protection Rules
+
+Protect `main` and `release/*`.
+
+-   Prevent direct pushes
+-   Require Pull Requests
+-   Require 1--2 approvals
+-   Enforce Four-Eye review
+-   Require CI/CD success
+-   Require CodeQL success
+-   Require Bandit, Trivy and pip-audit
+-   Require unit tests
+-   Require coverage threshold
+-   Dismiss stale approvals
+-   Restrict force pushes
+-   Restrict branch deletion
+-   Require signed commits (recommended)
+
+## CODEOWNERS
+
+Use a `CODEOWNERS` file to automatically assign reviewers.
+
+## Pull Request Template
+
+Include:
+
+-   Jira Ticket
+-   Problem Statement
+-   Solution
+-   Testing
+-   Deployment Impact
+-   Rollback Plan
+-   Reviewer Checklist
+
+------------------------------------------------------------------------
 
 # 12. CI/CD Pipeline
 
-```text
-Developer
-      │
-      ▼
+``` text
+Checkout
+ ↓
+Dependency Restore
+ ↓
 Pre-commit
-      ▼
-Flake8
-      ▼
+ ↓
+Ruff
+ ↓
 Black
-      ▼
+ ↓
 mypy
-      ▼
+ ↓
 pytest
-      ▼
+ ↓
+Coverage
+ ↓
 Bandit
-      ▼
+ ↓
 pip-audit
-      ▼
+ ↓
+Gitleaks
+ ↓
+CodeQL
+ ↓
 Docker Build
-      ▼
+ ↓
 Trivy
-      ▼
+ ↓
 Helm Lint
-      ▼
+ ↓
+Kubernetes Validation
+ ↓
 Deploy
 ```
 
----
+Also consider Dependabot or Renovate.
+
+------------------------------------------------------------------------
 
 # 13. AI-Assisted Development
 
-Recommended Tools
+Recommended:
 
-- GitHub Copilot
-- Amazon Q
-- Cursor
-- Qodo
+-   GitHub Copilot
+-   Amazon Q
+-   Cursor
+-   Qodo
 
-Use AI for:
+Always review AI-generated code before merging.
 
-- Unit test generation
-- Documentation
-- Code review
-- Refactoring
+------------------------------------------------------------------------
 
-> **Always review AI-generated code before committing it to the repository.**
+# 14. Documentation Standards
 
----
+Maintain:
 
-# 14. YAML & JSON Utilities
+-   README
+-   Google-style docstrings
+-   ADRs
+-   API documentation
+-   Architecture diagrams
+-   CHANGELOG
+
+------------------------------------------------------------------------
+
+# 15. YAML & JSON Utilities
 
 ## YAML
 
-| Tool | Purpose |
-|------|---------|
-| yamllint | Validate YAML syntax |
-| yq | Read, update, and process YAML |
-
-Commands
-
-```bash
-yamllint values.yaml
-
-yq '.image.tag' values.yaml
-
-yq '.replicaCount = 3' values.yaml
-```
-
----
+-   yamllint
+-   yq
 
 ## JSON
 
-| Tool | Purpose |
-|------|---------|
-| jq | Beautify, validate, and query JSON |
+-   jq
 
-Commands
+------------------------------------------------------------------------
 
-```bash
-jq '.' data.json
+# 16. Quick Reference
 
-jq '.name' data.json
+  Activity          Tool
+  ----------------- -------------------------
+  Lint              Ruff
+  Format            Black
+  Type Check        mypy
+  Tests             pytest
+  Security          Bandit, Trivy, Gitleaks
+  Dependency Scan   pip-audit
+  PR Analysis       CodeQL
+  YAML              yamllint, yq
+  JSON              jq
 
-jq empty data.json
-```
+------------------------------------------------------------------------
 
----
 
-# 15. Quick Reference
 
-| Activity | Command |
-|-----------|---------|
-| Create Virtual Environment | `python3 -m venv .venv` |
-| Activate Virtual Environment | `source .venv/bin/activate` |
-| Install Packages | `pip install -r requirements.txt` |
-| Freeze Packages | `pip freeze > requirements.txt` |
-| Format Code | `black .` |
-| Lint Code | `flake8 .` |
-| Type Check | `mypy .` |
-| Run Tests | `pytest` |
-| Test Coverage | `pytest --cov=src tests/` |
-| Security Scan | `bandit -r .` |
-| Dependency Scan | `pip-audit` |
-| Docker Build | `docker build -t my-app .` |
-| Docker Image Scan | `trivy image my-app` |
-| Validate YAML | `yamllint values.yaml` |
-| Process YAML | `yq '.image.tag' values.yaml` |
-| Beautify JSON | `jq '.' data.json` |
-| Validate JSON | `jq empty data.json` |
-| Helm Lint | `helm lint charts/my-chart` |
-| Kubernetes Dry Run | `kubectl apply --dry-run=client -f deployment.yaml` |
-
----
-
-# Overall Assessment
-
-Following these standards helps teams achieve:
-
-- Consistent code quality
-- Better maintainability
-- Improved security
-- Higher performance
-- Better scalability
-- Production-ready applications
-- Enterprise-grade software development practices
+This guide aligns with modern enterprise engineering practices by
+combining Python development standards with DevSecOps, cloud-native
+architecture, Git governance, CI/CD quality gates, supply-chain
+security, and AI-assisted development. It is suitable as a baseline
+engineering standard for enterprise software teams.
